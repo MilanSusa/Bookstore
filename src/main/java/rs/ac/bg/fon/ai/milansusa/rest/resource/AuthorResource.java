@@ -14,11 +14,24 @@ import rs.ac.bg.fon.ai.milansusa.rest.service.AuthorService;
 @Consumes(MediaType.APPLICATION_JSON)
 public class AuthorResource {
 
-	AuthorService authorService = new AuthorService();
+	private AuthorService authorService = new AuthorService();
 
 	@GET
 	public String getAuthors() {
-		return authorService.getAllAuthors();
+		return "["
+				+ "{"
+				+ "\"id\": 1,"
+				+ "\"firstName\": \"Napoleon\","
+				+ "\"lasName\": \"Hill\","
+				+ "\"gender\": \"MALE\""
+				+ "},"
+				+ "{"
+				+ "\"id\": 2,"
+				+ "\"firstName\": \"Ekhart\","
+				+ "\"lasName\": \"Tole\","
+				+ "\"gender\": \"MALE\""
+				+ "}"
+				+ "]";
 	}
 	
 }

@@ -1,21 +1,12 @@
 package rs.ac.bg.fon.ai.milansusa.rest.service;
 
+import java.util.List;
+
+import rs.ac.bg.fon.ai.milansusa.rest.model.Author;
+
 public class AuthorService {
 
-	public String getAllAuthors() {
-		return "["
-				+ "{"
-				+ "\"id\": 1,"
-				+ "\"firstName\": \"Napoleon\","
-				+ "\"lasName\": \"Hill\","
-				+ "\"gender\": \"MALE\""
-				+ "},"
-				+ "{"
-				+ "\"id\": 2,"
-				+ "\"firstName\": \"Ekhart\","
-				+ "\"lasName\": \"Tole\","
-				+ "\"gender\": \"MALE\""
-				+ "}"
-				+ "]";
+	public List<Author> getAllAuthors() {
+		return null;
 	}
 }
