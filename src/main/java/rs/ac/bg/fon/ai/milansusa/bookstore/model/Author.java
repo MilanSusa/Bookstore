@@ -1,9 +1,9 @@
-package rs.ac.bg.fon.ai.milansusa.rest.model;
+package rs.ac.bg.fon.ai.milansusa.bookstore.model;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import rs.ac.bg.fon.ai.milansusa.rest.model.enums.Gender;
+import rs.ac.bg.fon.ai.milansusa.bookstore.model.enums.Gender;
 
 public class Author {
 

@@ -1,4 +1,4 @@
-package rs.ac.bg.fon.ai.milansusa.rest.model;
+package rs.ac.bg.fon.ai.milansusa.bookstore.model;
 
 import java.util.HashSet;
 import java.util.Set;

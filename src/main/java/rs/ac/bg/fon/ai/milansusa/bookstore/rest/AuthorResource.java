@@ -1,4 +1,4 @@
-package rs.ac.bg.fon.ai.milansusa.rest.resource;
+package rs.ac.bg.fon.ai.milansusa.bookstore.rest;
 
 import javax.ws.rs.Consumes;
 
@@ -7,7 +7,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import rs.ac.bg.fon.ai.milansusa.rest.service.AuthorService;
+import rs.ac.bg.fon.ai.milansusa.bookstore.services.AuthorService;
 
 @Path("/authors")
 @Produces(MediaType.APPLICATION_JSON)
