@@ -10,8 +10,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Book;
+import rs.ac.bg.fon.ai.milansusa.bookstore.model.Review;
 import rs.ac.bg.fon.ai.milansusa.bookstore.rest.json.BookJsonSerializer;
+import rs.ac.bg.fon.ai.milansusa.bookstore.rest.json.ReviewJsonSerializer;
 import rs.ac.bg.fon.ai.milansusa.bookstore.services.BookService;
+import rs.ac.bg.fon.ai.milansusa.bookstore.services.ReviewService;
 
 @Path("/books")
 @Produces(MediaType.APPLICATION_JSON)
@@ -19,7 +22,8 @@ import rs.ac.bg.fon.ai.milansusa.bookstore.services.BookService;
 public class BookResource {
 
 	private BookService bookService = new BookService();
-
+	private ReviewService reviewService = new ReviewService();
+	
 	@GET
 	public String getBooks() {
 //		return "["
@@ -41,8 +45,8 @@ public class BookResource {
 	}
 
 	@Path("/{id}/reviews")
-	public String getReviewResource(@PathParam("id") long bookId) {
-		if (bookId == 1) {
+	public String getBookReviews(@PathParam("id") long bookId) {
+		/*if (bookId == 1) {
 			return "[" 
 					+ "{" 
 					+ "\"id\": 1, "
@@ -60,6 +64,9 @@ public class BookResource {
 					+ "\"rank\": 8.54 "
 					+ "}" 
 					+ "]";
-		}
+		}*/
+		List<Review> allBookReviews = reviewService.getReviewsForBook(bookId);
+		String response = ReviewJsonSerializer.serializeReviews(allBookReviews);
+		return response;
 	}
 }

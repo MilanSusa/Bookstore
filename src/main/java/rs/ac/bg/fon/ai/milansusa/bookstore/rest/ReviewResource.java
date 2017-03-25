@@ -1,11 +1,15 @@
 package rs.ac.bg.fon.ai.milansusa.bookstore.rest;
 
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import rs.ac.bg.fon.ai.milansusa.bookstore.model.Review;
+import rs.ac.bg.fon.ai.milansusa.bookstore.rest.json.ReviewJsonSerializer;
 import rs.ac.bg.fon.ai.milansusa.bookstore.services.ReviewService;
 
 @Path("/reviews")
@@ -17,6 +21,8 @@ public class ReviewResource {
 
 	@GET
 	public String getReviews() {
-		return "[]";
+		List<Review> allReviews = reviewService.getAllReviews();
+		String response = ReviewJsonSerializer.serializeReviews(allReviews);
+		return response;
 	}
 }

@@ -1,7 +1,9 @@
 package rs.ac.bg.fon.ai.milansusa.bookstore.persistance;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Author;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Book;
@@ -54,6 +56,30 @@ public class DummyBookstorePersistanceImpl implements BookstorePersistance {
 		review2.setReviewerLastName("Lazic");
 		review2.setRank(8.54);
 		allReviews.add(review2);
+
+		Set<Book> authorsBooks1 = new HashSet<>();
+		authorsBooks1.add(book1);
+		author1.setBooks(authorsBooks1);
+
+		Set<Book> authorsBooks2 = new HashSet<>();
+		authorsBooks2.add(book2);
+		author2.setBooks(authorsBooks2);
+
+		Set<Author> booksAuthors1 = new HashSet<>();
+		booksAuthors1.add(author1);
+		book1.setAuthors(booksAuthors1);
+
+		Set<Author> booksAuthors2 = new HashSet<>();
+		booksAuthors2.add(author2);
+		book2.setAuthors(booksAuthors2);
+
+		Set<Review> booksReviews1 = new HashSet<>();
+		booksReviews1.add(review1);
+		book1.setReviews(booksReviews1);
+
+		Set<Review> booksReviews2 = new HashSet<>();
+		booksReviews2.add(review2);
+		book2.setReviews(booksReviews2);
 	}
 
 	@Override
