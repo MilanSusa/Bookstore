@@ -14,6 +14,6 @@ public interface BookstorePersistance {
 
 	List<Review> getAllReviews();
 
-	Review getBookReviews(long bookId);
+	List<Review> getBookReviews(long bookId);
 
 }

@@ -15,23 +15,23 @@ import rs.ac.bg.fon.ai.milansusa.bookstore.services.AuthorService;
 public class AuthorResource {
 
 	private AuthorService authorService = new AuthorService();
-
+	
 	@GET
 	public String getAuthors() {
-		return "["
-				+ "{"
-				+ "\"id\": 1,"
+		return "[" 
+				+ "{" 
+				+ "\"id\": 1," 
 				+ "\"firstName\": \"Napoleon\","
-				+ "\"lasName\": \"Hill\","
-				+ "\"gender\": \"MALE\""
+				+ "\"lasName\": \"Hill\"," 
+				+ "\"gender\": \"MALE\"" 
 				+ "},"
-				+ "{"
-				+ "\"id\": 2,"
+				+ "{" 
+				+ "\"id\": 2," 
 				+ "\"firstName\": \"Ekhart\","
-				+ "\"lasName\": \"Tole\","
-				+ "\"gender\": \"MALE\""
-				+ "}"
+				+ "\"lasName\": \"Tole\"," 
+				+ "\"gender\": \"MALE\"" 
+				+ "}" 
 				+ "]";
 	}
-	
+
 }
