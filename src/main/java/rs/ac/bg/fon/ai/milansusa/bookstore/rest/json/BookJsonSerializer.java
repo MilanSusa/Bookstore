@@ -11,7 +11,6 @@ public class BookJsonSerializer {
 
 	public static String serializeBooks(List<Book> books) {
 		JsonArray booksArray = new JsonArray();
-
 		for (Book book : books) {
 			JsonObject bookJson = new JsonObject();
 			bookJson.addProperty("id", String.valueOf(book.getId()));
@@ -20,7 +19,7 @@ public class BookJsonSerializer {
 					String.valueOf(book.getReleaseYear()));
 			booksArray.add(bookJson);
 		}
-
 		return booksArray.toString();
 	}
+
 }

@@ -1,12 +1,15 @@
 package rs.ac.bg.fon.ai.milansusa.bookstore.rest;
 
-import javax.ws.rs.Consumes;
+import java.util.List;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import rs.ac.bg.fon.ai.milansusa.bookstore.model.Author;
+import rs.ac.bg.fon.ai.milansusa.bookstore.rest.json.AuthorJsonSerializer;
 import rs.ac.bg.fon.ai.milansusa.bookstore.services.AuthorService;
 
 @Path("/authors")
@@ -18,7 +21,7 @@ public class AuthorResource {
 	
 	@GET
 	public String getAuthors() {
-		return "[" 
+/*		return "[" 
 				+ "{" 
 				+ "\"id\": 1," 
 				+ "\"firstName\": \"Napoleon\","
@@ -31,7 +34,11 @@ public class AuthorResource {
 				+ "\"lasName\": \"Tole\"," 
 				+ "\"gender\": \"MALE\"" 
 				+ "}" 
-				+ "]";
+				+ "]";*/
+		
+		List<Author> allAuthors = authorService.getAllAuthors();
+		String response = AuthorJsonSerializer.serializeAuthors(allAuthors);
+		return response;
 	}
-
+	
 }
