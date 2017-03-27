@@ -11,7 +11,7 @@ import rs.ac.bg.fon.ai.milansusa.bookstore.model.Book;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Review;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.enums.Gender;
 
-public class DummyBookstorePersistanceImpl implements BookstorePersistance {
+public class DummyBookstorePersistenceImpl implements BookstorePersistence {
 
 	private static Map<Long, Author> allAuthors = new HashMap<>();
 	private static Map<Long, Book> allBooks = new HashMap<>();
