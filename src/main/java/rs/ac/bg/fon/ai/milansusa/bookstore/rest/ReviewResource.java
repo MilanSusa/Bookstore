@@ -1,6 +1,6 @@
 package rs.ac.bg.fon.ai.milansusa.bookstore.rest;
 
-import java.util.List;
+import java.util.Collection;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -21,7 +21,7 @@ public class ReviewResource {
 
 	@GET
 	public String getReviews() {
-		List<Review> allReviews = reviewService.getAllReviews();
+		Collection<Review> allReviews = reviewService.getAllReviews();
 		String response = ReviewJsonSerializer.serializeReviews(allReviews);
 		return response;
 	}

@@ -1,6 +1,6 @@
 package rs.ac.bg.fon.ai.milansusa.bookstore.rest;
 
-import java.util.List;
+import java.util.Collection;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -26,46 +26,15 @@ public class BookResource {
 	
 	@GET
 	public String getBooks() {
-//		return "["
-//				+ "{"
-//				+ "\"id\": 1,"
-//				+ "\"title\": \"Think and Grow Rich\","
-//				+ "\"releaseYear\": 1937"
-//				+ "},"
-//				+ "{"
-//				+ "\"id\": 2,"
-//				+ "\"title\": \"The Power of Now\","
-//				+ "\"releaseYear\": 1997"
-//				+ "}"
-//				+ "]";
-		
-		List<Book> allBooks = bookService.getAllBooks();
+		Collection<Book> allBooks = bookService.getAllBooks();
 		String response = BookJsonSerializer.serializeBooks(allBooks);
 		return response;
 	}
 
+	@GET
 	@Path("/{id}/reviews")
 	public String getBookReviews(@PathParam("id") long bookId) {
-		/*if (bookId == 1) {
-			return "[" 
-					+ "{" 
-					+ "\"id\": 1, "
-					+ "\"reviewerFirstName\": \"Mika\", "
-					+ "\"reviewerLastName\": \"Peric\", " 
-					+ "\"rank\": 9.18 "
-					+ "}" 
-					+ "]";
-		} else {
-			return "[" 
-					+ "{ " 
-					+ "\"id\": 2,"
-					+ "\"reviewerFirstName\":\"Jovana\", "
-					+ "\"reviewerLastName\": \"Lazic\", " 
-					+ "\"rank\": 8.54 "
-					+ "}" 
-					+ "]";
-		}*/
-		List<Review> allBookReviews = reviewService.getReviewsForBook(bookId);
+		Collection<Review> allBookReviews = reviewService.getReviewsForBook(bookId);
 		String response = ReviewJsonSerializer.serializeReviews(allBookReviews);
 		return response;
 	}

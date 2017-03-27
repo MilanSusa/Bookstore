@@ -1,17 +1,17 @@
 package rs.ac.bg.fon.ai.milansusa.bookstore.rest.json;
 
-import java.util.List;
-
-import rs.ac.bg.fon.ai.milansusa.bookstore.model.Review;
+import java.util.Collection;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import rs.ac.bg.fon.ai.milansusa.bookstore.model.Review;
+
 public class ReviewJsonSerializer {
 
-	public static String serializeReviews(List<Review> reviews) {
+	public static String serializeReviews(Collection<Review> allReviews) {
 		JsonArray reviewsArray = new JsonArray();
-		for (Review review : reviews) {
+		for (Review review : allReviews) {
 			JsonObject reviewJson = new JsonObject();
 			reviewJson.addProperty("id", String.valueOf(review.getId()));
 			reviewJson.addProperty("reviewerFirstName",

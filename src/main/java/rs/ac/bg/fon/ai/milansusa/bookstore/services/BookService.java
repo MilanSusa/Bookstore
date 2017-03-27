@@ -1,6 +1,6 @@
 package rs.ac.bg.fon.ai.milansusa.bookstore.services;
 
-import java.util.List;
+import java.util.Collection;
 
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Book;
 import rs.ac.bg.fon.ai.milansusa.bookstore.persistance.BookstorePersistance;
@@ -10,7 +10,7 @@ public class BookService {
 	
 	private BookstorePersistance persistance = new DummyBookstorePersistanceImpl();
 
-	public List<Book> getAllBooks() {
+	public Collection<Book> getAllBooks() {
 		return persistance.getAllBooks();
 	}
 }

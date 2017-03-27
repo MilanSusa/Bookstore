@@ -1,8 +1,9 @@
 package rs.ac.bg.fon.ai.milansusa.bookstore.persistance;
 
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Author;
@@ -12,9 +13,9 @@ import rs.ac.bg.fon.ai.milansusa.bookstore.model.enums.Gender;
 
 public class DummyBookstorePersistanceImpl implements BookstorePersistance {
 
-	private static List<Author> allAuthors = new LinkedList<>();
-	private static List<Book> allBooks = new LinkedList<>();
-	private static List<Review> allReviews = new LinkedList<>();
+	private static Map<Long, Author> allAuthors = new HashMap<>();
+	private static Map<Long, Book> allBooks = new HashMap<>();
+	private static Map<Long, Review> allReviews = new HashMap<>();
 
 	static {
 		Author author1 = new Author();
@@ -22,40 +23,40 @@ public class DummyBookstorePersistanceImpl implements BookstorePersistance {
 		author1.setFirstName("Napoleon");
 		author1.setLastName("Hill");
 		author1.setGender(Gender.MALE);
-		allAuthors.add(author1);
+		allAuthors.put(1L, author1);
 
 		Author author2 = new Author();
 		author2.setId(2);
 		author2.setFirstName("Ekhart");
 		author2.setLastName("Tole");
 		author2.setGender(Gender.MALE);
-		allAuthors.add(author2);
+		allAuthors.put(2L, author2);
 
 		Book book1 = new Book();
 		book1.setId(1);
 		book1.setTitle("Think and Grow Rich");
 		book1.setReleaseYear(1937);
-		allBooks.add(book1);
+		allBooks.put(1L, book1);
 
 		Book book2 = new Book();
 		book2.setId(2);
 		book2.setTitle("The Power of Now");
 		book2.setReleaseYear(1996);
-		allBooks.add(book2);
+		allBooks.put(2L, book2);
 
 		Review review1 = new Review();
 		review1.setId(1);
 		review1.setReviewerFistName("Mika");
 		review1.setReviewerLastName("Peric");
 		review1.setRank(9.18);
-		allReviews.add(review1);
+		allReviews.put(1L, review1);
 
 		Review review2 = new Review();
 		review2.setId(2);
 		review2.setReviewerFistName("Jovana");
 		review2.setReviewerLastName("Lazic");
 		review2.setRank(8.54);
-		allReviews.add(review2);
+		allReviews.put(2L, review2);
 
 		Set<Book> authorsBooks1 = new HashSet<>();
 		authorsBooks1.add(book1);
@@ -83,36 +84,44 @@ public class DummyBookstorePersistanceImpl implements BookstorePersistance {
 	}
 
 	@Override
-	public List<Author> getAllAuthors() {
-		return allAuthors;
+	public Collection<Author> getAllAuthors() {
+		return allAuthors.values();
+	}
+	
+	@Override
+	public Author getAuthor(long id) {
+		return allAuthors.get(id);
 	}
 
 	@Override
-	public List<Book> getAllBooks() {
-		return allBooks;
+	public Collection<Book> getAllBooks() {
+		return allBooks.values();
+	}
+	
+	@Override
+	public Book getBook(long id) {
+		return allBooks.get(id);
 	}
 
 	@Override
-	public List<Review> getAllReviews() {
-		return allReviews;
+	public Collection<Review> getAllReviews() {
+		return allReviews.values();
+	}
+	
+	@Override
+	public Review getReview(long id) {
+		return allReviews.get(id);
 	}
 
 	@Override
-	public List<Review> getBookReviews(long bookId) {
-		List<Review> reviews = new LinkedList<>();
-		for (int i = 0; i < allBooks.size(); i++) {
-			Book book = allBooks.get(i);
-			if (book.getId() == bookId) {
-				reviews.addAll(book.getReviews());
-				if (reviews.isEmpty()) {
-					throw new RuntimeException(
-							"There are no reviews for the book with ID: "
-									+ bookId);
-				}
-				return reviews;
-			}
+	public Collection<Review> getBookReviews(long bookId) {
+		Book book = getBook(bookId);
+		
+		if (book != null) {
+			return book.getReviews();
+		} else {
+			throw new RuntimeException("There is no book with ID: " + bookId);
 		}
-		throw new RuntimeException("There is no book with ID: " + bookId);
 	}
 
 }

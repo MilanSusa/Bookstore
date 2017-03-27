@@ -1,6 +1,6 @@
 package rs.ac.bg.fon.ai.milansusa.bookstore.services;
 
-import java.util.List;
+import java.util.Collection;
 
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Author;
 import rs.ac.bg.fon.ai.milansusa.bookstore.persistance.BookstorePersistance;
@@ -10,7 +10,7 @@ public class AuthorService {
 	
 	private BookstorePersistance persistance = new DummyBookstorePersistanceImpl();
 
-	public List<Author> getAllAuthors() {
+	public Collection<Author> getAllAuthors() {
 		return persistance.getAllAuthors();
 	}
 }
