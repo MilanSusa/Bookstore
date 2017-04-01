@@ -1,71 +1,192 @@
 package rs.ac.bg.fon.ai.milansusa.bookstore.persistance;
 
 import java.util.Collection;
+import java.util.LinkedList;
+import java.sql.*;
 
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Author;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Book;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Review;
+import rs.ac.bg.fon.ai.milansusa.bookstore.model.enums.Gender;
 
 public class DatabasePersistence implements BookstorePersistence {
-	
-	private final String database = "bookstore";
+
+	private final String database = "jdbc:mysql://localhost:3306/bookstore";
 	private final String username = "root";
 	private final String password = "root";
-	
-	// Connection connection = null;
-	// Statement statement = null;
-	
+
+	Connection connection = null;
+	Statement statement = null;
+
 	private void openConnection() {
-		// open connection and create statement that are class fields
+		try {
+			connection = DriverManager.getConnection(database, username,
+					password);
+			statement = connection.createStatement();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-	
+
 	private void closeConnection() {
-		// close connection
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public Collection<Author> getAllAuthors() {
+		Collection<Author> authors = new LinkedList<>();
 		openConnection();
-		// ResultSet result = statement.executeQuery("SELECT * FROM books");
-		
+		try {
+			ResultSet result = statement.executeQuery("SELECT * FROM authors");
+			while (result.next()) {
+				Author author = new Author();
+				author.setId(result.getLong("id"));
+				author.setFirstName(result.getString("firstName"));
+				author.setLastName(result.getString("lastName"));
+				author.setGender(Gender.valueOf(result.getString("gender")));
+				authors.add(author);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		closeConnection();
-		return null;
+		return authors;
 	}
 
 	@Override
 	public Author getAuthor(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		Author author = new Author();
+		openConnection();
+		try {
+			ResultSet result = statement
+					.executeQuery("SELECT * FROM authors WHERE id = " + id);
+			while (result.next()) {
+				author.setId(result.getLong("id"));
+				author.setFirstName(result.getString("firstName"));
+				author.setLastName(result.getString("lastName"));
+				author.setGender(Gender.valueOf(result.getString("gender")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		closeConnection();
+		return author;
 	}
 
 	@Override
 	public Collection<Book> getAllBooks() {
-		// TODO Auto-generated method stub
-		return null;
+		Collection<Book> books = new LinkedList<>();
+		openConnection();
+		try {
+			ResultSet result = statement.executeQuery("SELECT * FROM books");
+			while (result.next()) {
+				Book book = new Book();
+				book.setId(result.getLong("id"));
+				book.setTitle(result.getString("title"));
+				book.setReleaseYear(result.getInt("releaseYear"));
+				books.add(book);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		closeConnection();
+		return books;
 	}
 
 	@Override
 	public Book getBook(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		Book book = new Book();
+		openConnection();
+		try {
+			ResultSet result = statement
+					.executeQuery("SELECT * FROM books WHERE id = " + id);
+			while (result.next()) {
+				book.setId(result.getLong("id"));
+				book.setTitle(result.getString("title"));
+				book.setReleaseYear(result.getInt("releaseYear"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		closeConnection();
+		return book;
 	}
 
 	@Override
 	public Collection<Review> getAllReviews() {
-		// TODO Auto-generated method stub
-		return null;
+		Collection<Review> reviews = new LinkedList<>();
+		openConnection();
+		try {
+			ResultSet result = statement.executeQuery("SELECT * FROM reviews");
+			while (result.next()) {
+				Review review = new Review();
+				review.setId(result.getLong("id"));
+				review.setReviewerFistName(result
+						.getString("reviewersFirstName"));
+				review.setReviewerLastName(result
+						.getString("reviewersLastName"));
+				review.setRank(result.getDouble("rank"));
+				review.setCreated(result.getDate("created"));
+				reviews.add(review);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		closeConnection();
+		return reviews;
 	}
 
 	@Override
 	public Review getReview(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		Review review = new Review();
+		openConnection();
+		try {
+			ResultSet result = statement
+					.executeQuery("SELECT * FROM reviews WHERE id = " + id);
+			while (result.next()) {
+				review.setId(result.getLong("id"));
+				review.setReviewerFistName(result
+						.getString("reviewersFirstName"));
+				review.setReviewerLastName(result
+						.getString("reviewersLastName"));
+				review.setRank(result.getDouble("rank"));
+				review.setCreated(result.getDate("created"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		closeConnection();
+		return review;
 	}
 
 	@Override
 	public Collection<Review> getBookReviews(long bookId) {
-		// TODO Auto-generated method stub
-		return null;
+		Collection<Review> reviews = new LinkedList<>();
+		openConnection();
+		try {
+			ResultSet result = statement
+					.executeQuery("SELECT * FROM reviews WHERE forBook = "
+							+ bookId);
+			while (result.next()) {
+				Review review = new Review();
+				review.setId(result.getLong("id"));
+				review.setReviewerFistName(result
+						.getString("reviewersFirstName"));
+				review.setReviewerLastName(result
+						.getString("reviewersLastName"));
+				review.setRank(result.getDouble("rank"));
+				review.setCreated(result.getDate("created"));
+				reviews.add(review);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		closeConnection();
+		return reviews;
 	}
 
 }

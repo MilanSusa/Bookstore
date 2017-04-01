@@ -61,4 +61,10 @@ public class Book {
 		this.reviews = reviews;
 	}
 
+	@Override
+	public String toString() {
+		return "Book [id=" + id + ", title=" + title + ", releaseYear="
+				+ releaseYear + "]";
+	}
+
 }

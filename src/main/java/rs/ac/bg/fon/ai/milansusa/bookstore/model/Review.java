@@ -14,7 +14,8 @@ public class Review {
 
 	}
 
-	public Review(long id, String reviewerFistName, String reviewerLastName, double rank, Date created) {
+	public Review(long id, String reviewerFistName, String reviewerLastName,
+			double rank, Date created) {
 		this.id = id;
 		this.reviewerFistName = reviewerFistName;
 		this.reviewerLastName = reviewerLastName;
@@ -60,6 +61,13 @@ public class Review {
 
 	public void setCreated(Date created) {
 		this.created = created;
+	}
+
+	@Override
+	public String toString() {
+		return "Review [id=" + id + ", reviewerFistName=" + reviewerFistName
+				+ ", reviewerLastName=" + reviewerLastName + ", rank=" + rank
+				+ ", created=" + created + "]";
 	}
 
 }
