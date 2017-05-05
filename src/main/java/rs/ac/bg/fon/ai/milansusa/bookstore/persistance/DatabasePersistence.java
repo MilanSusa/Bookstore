@@ -174,7 +174,7 @@ public class DatabasePersistence implements BookstorePersistence {
 	@Override
 	public Collection<Review> getBookReviews(long bookId) {
 		Collection<Review> reviews = new LinkedList<>();
-		String query = "SELECT * FROM reviews WHERE forBook = ?";
+		String query = "SELECT * FROM reviews WHERE bookId = ?";
 		openConnection();
 		try {
 			PreparedStatement preparedStatement = connection
