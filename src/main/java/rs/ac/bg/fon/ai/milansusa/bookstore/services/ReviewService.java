@@ -1,14 +1,13 @@
 package rs.ac.bg.fon.ai.milansusa.bookstore.services;
 
 import java.util.Collection;
-
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Review;
 import rs.ac.bg.fon.ai.milansusa.bookstore.persistance.BookstorePersistence;
-import rs.ac.bg.fon.ai.milansusa.bookstore.persistance.DummyBookstorePersistenceImpl;
+import rs.ac.bg.fon.ai.milansusa.bookstore.persistance.DatabasePersistence;
 
 public class ReviewService {
 
-	private BookstorePersistence persistance = new DummyBookstorePersistenceImpl();
+	private BookstorePersistence persistance = new DatabasePersistence();
 
 	public Collection<Review> getAllReviews() {
 		return persistance.getAllReviews();

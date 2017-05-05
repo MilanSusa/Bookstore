@@ -3,7 +3,6 @@ package rs.ac.bg.fon.ai.milansusa.bookstore.persistance;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.sql.*;
-
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Author;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Book;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Review;
@@ -60,10 +59,13 @@ public class DatabasePersistence implements BookstorePersistence {
 	@Override
 	public Author getAuthor(long id) {
 		Author author = new Author();
+		String query = "SELECT * FROM authors WHERE id = ?";
 		openConnection();
 		try {
-			ResultSet result = statement
-					.executeQuery("SELECT * FROM authors WHERE id = " + id);
+			PreparedStatement preparedStatement = connection
+					.prepareStatement(query);
+			preparedStatement.setLong(1, id);
+			ResultSet result = preparedStatement.executeQuery();
 			while (result.next()) {
 				author.setId(result.getLong("id"));
 				author.setFirstName(result.getString("firstName"));
@@ -100,10 +102,13 @@ public class DatabasePersistence implements BookstorePersistence {
 	@Override
 	public Book getBook(long id) {
 		Book book = new Book();
+		String query = "SELECT * FROM books WHERE id = ?";
 		openConnection();
 		try {
-			ResultSet result = statement
-					.executeQuery("SELECT * FROM books WHERE id = " + id);
+			PreparedStatement preparedStatement = connection
+					.prepareStatement(query);
+			preparedStatement.setLong(1, id);
+			ResultSet result = preparedStatement.executeQuery(query);
 			while (result.next()) {
 				book.setId(result.getLong("id"));
 				book.setTitle(result.getString("title"));
@@ -143,10 +148,13 @@ public class DatabasePersistence implements BookstorePersistence {
 	@Override
 	public Review getReview(long id) {
 		Review review = new Review();
+		String query = "SELECT * FROM reviews WHERE id = ?";
 		openConnection();
 		try {
-			ResultSet result = statement
-					.executeQuery("SELECT * FROM reviews WHERE id = " + id);
+			PreparedStatement preparedStatement = connection
+					.prepareStatement(query);
+			preparedStatement.setLong(1, id);
+			ResultSet result = preparedStatement.executeQuery(query);
 			while (result.next()) {
 				review.setId(result.getLong("id"));
 				review.setReviewerFistName(result
@@ -166,11 +174,13 @@ public class DatabasePersistence implements BookstorePersistence {
 	@Override
 	public Collection<Review> getBookReviews(long bookId) {
 		Collection<Review> reviews = new LinkedList<>();
+		String query = "SELECT * FROM reviews WHERE forBook = ?";
 		openConnection();
 		try {
-			ResultSet result = statement
-					.executeQuery("SELECT * FROM reviews WHERE forBook = "
-							+ bookId);
+			PreparedStatement preparedStatement = connection
+					.prepareStatement(query);
+			preparedStatement.setLong(1, bookId);
+			ResultSet result = preparedStatement.executeQuery(query);
 			while (result.next()) {
 				Review review = new Review();
 				review.setId(result.getLong("id"));
