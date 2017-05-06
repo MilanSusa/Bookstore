@@ -12,4 +12,9 @@ public class AuthorService {
 	public Collection<Author> getAllAuthors() {
 		return persistance.getAllAuthors();
 	}
+
+	public Author getAuthor(long authorId) {
+		return persistance.getAuthor(authorId);
+	}
+
 }

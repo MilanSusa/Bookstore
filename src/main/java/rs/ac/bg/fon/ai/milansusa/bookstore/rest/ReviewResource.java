@@ -1,10 +1,12 @@
 package rs.ac.bg.fon.ai.milansusa.bookstore.rest;
 
 import java.util.Collection;
+import java.util.LinkedList;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -25,4 +27,15 @@ public class ReviewResource {
 		String response = ReviewJsonSerializer.serializeReviews(allReviews);
 		return response;
 	}
+
+	@GET
+	@Path("/{id}")
+	public String getReview(@PathParam("id") long reviewId) {
+		Review review = reviewService.getReview(reviewId);
+		Collection<Review> reviewHolder = new LinkedList<>();
+		reviewHolder.add(review);
+		String response = ReviewJsonSerializer.serializeReviews(reviewHolder);
+		return response;
+	}
+
 }

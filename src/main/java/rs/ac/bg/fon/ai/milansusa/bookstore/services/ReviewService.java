@@ -13,7 +13,12 @@ public class ReviewService {
 		return persistance.getAllReviews();
 	}
 
+	public Review getReview(long reviewId) {
+		return persistance.getReview(reviewId);
+	}
+
 	public Collection<Review> getReviewsForBook(long bookId) {
 		return persistance.getBookReviews(bookId);
 	}
+
 }

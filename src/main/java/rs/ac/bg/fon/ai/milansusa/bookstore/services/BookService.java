@@ -6,10 +6,15 @@ import rs.ac.bg.fon.ai.milansusa.bookstore.persistance.BookstorePersistence;
 import rs.ac.bg.fon.ai.milansusa.bookstore.persistance.DatabasePersistence;
 
 public class BookService {
-	
+
 	private BookstorePersistence persistance = new DatabasePersistence();
 
 	public Collection<Book> getAllBooks() {
 		return persistance.getAllBooks();
 	}
+
+	public Book getBook(long bookId) {
+		return persistance.getBook(bookId);
+	}
+
 }
