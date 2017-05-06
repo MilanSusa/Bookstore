@@ -19,6 +19,7 @@ public class DatabasePersistence implements BookstorePersistence {
 
 	private void openConnection() {
 		try {
+			Class.forName("com.mysql.jdbc.Driver");
 			connection = DriverManager.getConnection(database, username,
 					password);
 			statement = connection.createStatement();
@@ -108,7 +109,7 @@ public class DatabasePersistence implements BookstorePersistence {
 			PreparedStatement preparedStatement = connection
 					.prepareStatement(query);
 			preparedStatement.setLong(1, id);
-			ResultSet result = preparedStatement.executeQuery(query);
+			ResultSet result = preparedStatement.executeQuery();
 			while (result.next()) {
 				book.setId(result.getLong("id"));
 				book.setTitle(result.getString("title"));
@@ -154,7 +155,7 @@ public class DatabasePersistence implements BookstorePersistence {
 			PreparedStatement preparedStatement = connection
 					.prepareStatement(query);
 			preparedStatement.setLong(1, id);
-			ResultSet result = preparedStatement.executeQuery(query);
+			ResultSet result = preparedStatement.executeQuery();
 			while (result.next()) {
 				review.setId(result.getLong("id"));
 				review.setReviewerFistName(result
@@ -180,7 +181,7 @@ public class DatabasePersistence implements BookstorePersistence {
 			PreparedStatement preparedStatement = connection
 					.prepareStatement(query);
 			preparedStatement.setLong(1, bookId);
-			ResultSet result = preparedStatement.executeQuery(query);
+			ResultSet result = preparedStatement.executeQuery();
 			while (result.next()) {
 				Review review = new Review();
 				review.setId(result.getLong("id"));
