@@ -1,0 +1,50 @@
+body {
+	background-color: black;
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+#container {
+	background-color: white;
+	width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#header {
+	background-color: blue;
+	color: white;
+	text-align: center;
+}
+
+#content {
+	height: 800px;
+	text-align: center;
+}
+
+#footer {
+	padding: 5px;
+	background-color: grey;
+	color: white;
+	text-align: right;
+}
+
+#btnAuthors {
+	width: 150px;
+	height: 100px;
+	color: red;
+	font-size: 25px;
+}
+
+#btnBooks {
+	width: 150px;
+	height: 100px;
+	color: red;
+	font-size: 25px;
+}
+
+#btnReviews {
+	width: 150px;
+	height: 100px;
+	color: red;
+	font-size: 25px;
+}
