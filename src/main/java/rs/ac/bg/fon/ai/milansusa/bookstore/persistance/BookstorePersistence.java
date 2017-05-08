@@ -12,7 +12,7 @@ public interface BookstorePersistence {
 
 	Author getAuthor(long id);
 
-	Collection<Book> getAllBooks();
+	Result<Book> getAllBooks(int page, int limit);
 	
 	Book getBook(long id);
 

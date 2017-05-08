@@ -33,7 +33,10 @@ function findAllBooks() {
 		type : 'GET',
 		url : rootURL + '/books',
 		dataType : "json",
-		success : function(books) {
+		success : function(result) {
+			var maxResults = result.pagination.maxResults;
+			
+			var books = result.data;
 			$.each(books, function(index, book) {
 				$('#books').append(
 						'<li>' + book.id + book.title + book.releaseYear

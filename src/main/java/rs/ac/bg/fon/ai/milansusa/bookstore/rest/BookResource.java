@@ -2,14 +2,18 @@ package rs.ac.bg.fon.ai.milansusa.bookstore.rest;
 
 import java.util.Collection;
 import java.util.LinkedList;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Book;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Review;
+import rs.ac.bg.fon.ai.milansusa.bookstore.persistance.Result;
 import rs.ac.bg.fon.ai.milansusa.bookstore.rest.json.BookJsonSerializer;
 import rs.ac.bg.fon.ai.milansusa.bookstore.rest.json.ReviewJsonSerializer;
 import rs.ac.bg.fon.ai.milansusa.bookstore.services.BookService;
@@ -24,9 +28,18 @@ public class BookResource {
 	private ReviewService reviewService = new ReviewService();
 
 	@GET
-	public String getBooks() {
-		Collection<Book> allBooks = bookService.getAllBooks();
-		String response = BookJsonSerializer.serializeBooks(allBooks);
+	public String getBooks(@QueryParam("limit") int limit, @QueryParam("page") int page) {
+		// setting default values if 0
+		if (limit == 0) {
+			limit = 10;
+		}
+		if (page == 0) {
+			limit = 1;
+		}
+		
+		
+		Result<Book> result = bookService.getAllBooks(page, limit);
+		String response = BookJsonSerializer.serializeBooks(result.getData());
 		return response;
 	}
 

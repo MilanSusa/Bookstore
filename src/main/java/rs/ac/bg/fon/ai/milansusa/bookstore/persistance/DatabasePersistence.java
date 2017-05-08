@@ -81,11 +81,25 @@ public class DatabasePersistence implements BookstorePersistence {
 	}
 
 	@Override
-	public Collection<Book> getAllBooks() {
+	public Result<Book> getAllBooks(int page, int limit) {
 		Collection<Book> books = new LinkedList<>();
 		openConnection();
 		try {
-			ResultSet result = statement.executeQuery("SELECT * FROM books");
+			String query = 
+					"SELECT * " + 
+					"FROM books " +
+					"ORDER BY title " +
+					"LIMIT ? " +
+					"OFFSET ? ";
+			
+			PreparedStatement preparedStatement = connection
+					.prepareStatement(query);
+			
+			preparedStatement.setLong(1, limit);
+			preparedStatement.setLong(2, (page-1)*limit);
+			
+			ResultSet result = preparedStatement.executeQuery();
+			
 			while (result.next()) {
 				Book book = new Book();
 				book.setId(result.getLong("id"));
@@ -96,8 +110,12 @@ public class DatabasePersistence implements BookstorePersistence {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		// new query to get book count, 
+		
 		closeConnection();
-		return books;
+		
+		return new Result<Book>(books, 10);
 	}
 
 	@Override
