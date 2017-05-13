@@ -42,13 +42,13 @@
 			<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav side-nav">
-					<li class="active"><a href="index.html"><i
+					<li id="liDashboard" class="active"><a href="index.html"><i
 							class="fa fa-fw fa-dashboard"></i> Dashboard</a></li>
-					<li><a href="authors.html"><i class="fa fa-fw fa-users"></i>
-							Authors</a></li>
-					<li><a href="books.html"><i class="fa fa-fw fa-book"></i>
-							Books</a></li>
-					<li><a href="reviews.html"><i
+					<li id="liAuthors"><a href="authors.html"><i
+							class="fa fa-fw fa-users"></i> Authors</a></li>
+					<li id="liBooks"><a href="books.html"><i
+							class="fa fa-fw fa-book"></i> Books</a></li>
+					<li id="liReviews"><a href="reviews.html"><i
 							class="fa fa-fw fa-comments-o"></i> Reviews</a></li>
 				</ul>
 			</div>
@@ -150,7 +150,9 @@
 	<!-- /#wrapper -->
 
 	<!-- jQuery -->
-	<script src="js/jquery.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="js/main.js"></script>
 
 	<!-- Bootstrap Core JavaScript -->
 	<script src="js/bootstrap.min.js"></script>

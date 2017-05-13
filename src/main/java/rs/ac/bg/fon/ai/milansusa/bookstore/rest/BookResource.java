@@ -1,8 +1,6 @@
 package rs.ac.bg.fon.ai.milansusa.bookstore.rest;
 
 import java.util.Collection;
-import java.util.LinkedList;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -10,7 +8,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
-
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Book;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Review;
 import rs.ac.bg.fon.ai.milansusa.bookstore.persistance.Result;
@@ -28,29 +25,28 @@ public class BookResource {
 	private ReviewService reviewService = new ReviewService();
 
 	@GET
-	public String getBooks(@QueryParam("limit") int limit, @QueryParam("page") int page) {
-		// setting default values if 0
+	public String getBooks(@QueryParam("limit") int limit,
+			@QueryParam("page") int page) {
 		if (limit == 0) {
 			limit = 10;
 		}
 		if (page == 0) {
-			limit = 1;
+			page = 1;
 		}
-		
-		
 		Result<Book> result = bookService.getAllBooks(page, limit);
-		String response = BookJsonSerializer.serializeBooks(result.getData());
+		String response = BookJsonSerializer.serializeBooks(result);
 		return response;
 	}
 
 	@GET
 	@Path("/{id}")
 	public String getBook(@PathParam("id") long bookId) {
-		Book book = bookService.getBook(bookId);
-		Collection<Book> bookHolder = new LinkedList<Book>();
-		bookHolder.add(book);
-		String response = BookJsonSerializer.serializeBooks(bookHolder);
-		return response;
+		// Book book = bookService.getBook(bookId);
+		// Collection<Book> bookHolder = new LinkedList<Book>();
+		// bookHolder.add(book);
+		// String response = BookJsonSerializer.serializeBooks(bookHolder);
+		// return response;
+		return "";
 	}
 
 	@GET

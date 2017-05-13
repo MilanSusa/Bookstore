@@ -1,15 +1,9 @@
 var rootURL = "http://localhost:8080/rest/webapi";
 var currentAuthor, currentBook, currentReview;
 
-$('#btnAuthors').click(function() {
+$(function() {
 	findAllAuthors();
-});
-
-$('#btnBooks').click(function() {
 	findAllBooks();
-});
-
-$('#btnReviews').click(function() {
 	findAllReviews();
 });
 
@@ -20,9 +14,10 @@ function findAllAuthors() {
 		dataType : "json",
 		success : function(authors) {
 			$.each(authors, function(index, author) {
-				$('#authors').append(
-						'<li>' + author.id + author.firstName + author.lastName
-								+ author.gender + '</li>');
+				$('#tAuthors').append(
+						'<tr><td>' + author.id + '</td><td>' + author.firstName
+								+ '</td><td>' + author.lastName + '</td><td>'
+								+ author.gender + '</td></tr>');
 			});
 		}
 	});
@@ -35,12 +30,13 @@ function findAllBooks() {
 		dataType : "json",
 		success : function(result) {
 			var maxResults = result.pagination.maxResults;
-			
 			var books = result.data;
 			$.each(books, function(index, book) {
-				$('#books').append(
-						'<li>' + book.id + book.title + book.releaseYear
-								+ '</li>');
+				$('#tBooks')
+						.append(
+								'<tr><td>' + book.id + '</td><td>' + book.title
+										+ '</td><td>' + book.releaseYear
+										+ '<td/></tr>');
 			});
 		}
 	});
@@ -53,10 +49,12 @@ function findAllReviews() {
 		dataType : "json",
 		success : function(reviews) {
 			$.each(reviews, function(index, review) {
-				$('#reviews').append(
-						'<li>' + review.id + review.reviewerFirstName
-								+ review.reviewerlastName + review.rank
-								+ review.created + '</li>');
+				$('#tReviews').append(
+						'<tr><td>' + review.id + '</td><td>'
+								+ review.reviewerFirstName + '</td><td>'
+								+ review.reviewerLastName + '</td><td>'
+								+ review.rank + '</td><td>' + review.created
+								+ '</td></tr>');
 			});
 		}
 	});
