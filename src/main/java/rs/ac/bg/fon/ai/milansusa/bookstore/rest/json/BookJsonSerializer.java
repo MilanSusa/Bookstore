@@ -12,7 +12,7 @@ public class BookJsonSerializer {
 		JsonObject pagination = new JsonObject();
 		pagination.addProperty("maxResults",
 				String.valueOf(allBooks.getMaxResults()));
-		result.addProperty("pagination", pagination.toString());
+		result.add("pagination", pagination);
 		JsonArray booksArray = new JsonArray();
 		for (Book book : allBooks.getData()) {
 			JsonObject bookJson = new JsonObject();
@@ -22,7 +22,7 @@ public class BookJsonSerializer {
 					String.valueOf(book.getReleaseYear()));
 			booksArray.add(bookJson);
 		}
-		result.addProperty("data", booksArray.toString());
+		result.add("data", booksArray);
 		return result.toString();
 	}
 
