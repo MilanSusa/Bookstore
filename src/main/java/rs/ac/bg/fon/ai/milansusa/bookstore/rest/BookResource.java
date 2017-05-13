@@ -1,6 +1,8 @@
 package rs.ac.bg.fon.ai.milansusa.bookstore.rest;
 
 import java.util.Collection;
+import java.util.LinkedList;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -8,6 +10,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Book;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Review;
 import rs.ac.bg.fon.ai.milansusa.bookstore.persistance.Result;
@@ -41,12 +44,12 @@ public class BookResource {
 	@GET
 	@Path("/{id}")
 	public String getBook(@PathParam("id") long bookId) {
-		// Book book = bookService.getBook(bookId);
-		// Collection<Book> bookHolder = new LinkedList<Book>();
-		// bookHolder.add(book);
-		// String response = BookJsonSerializer.serializeBooks(bookHolder);
-		// return response;
-		return "";
+		Book book = bookService.getBook(bookId);
+		Collection<Book> bookHolder = new LinkedList<Book>();
+		bookHolder.add(book);
+		String response = BookJsonSerializer.serializeBooks(new Result<>(
+				bookHolder, 1));
+		return response;
 	}
 
 	@GET

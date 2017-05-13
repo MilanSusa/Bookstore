@@ -37,11 +37,21 @@ public class DatabasePersistence implements BookstorePersistence {
 	}
 
 	@Override
-	public Collection<Author> getAllAuthors() {
+	public Result<Author> getAllAuthors(int page, int limit) {
 		Collection<Author> authors = new LinkedList<>();
+		int maxResults = 0;
 		openConnection();
 		try {
-			ResultSet result = statement.executeQuery("SELECT * FROM authors");
+			String query = 	"SELECT * " + 
+							"FROM authors " + 
+							"ORDER BY lastName " + 
+							"LIMIT ? " + 
+							"OFFSET ? ";
+			PreparedStatement preparedStatement = connection
+					.prepareStatement(query);
+			preparedStatement.setLong(1, limit);
+			preparedStatement.setLong(2, (page - 1) * limit);
+			ResultSet result = preparedStatement.executeQuery();
 			while (result.next()) {
 				Author author = new Author();
 				author.setId(result.getLong("id"));
@@ -50,11 +60,16 @@ public class DatabasePersistence implements BookstorePersistence {
 				author.setGender(Gender.valueOf(result.getString("gender")));
 				authors.add(author);
 			}
+			String query1 = "SELECT COUNT(*) " + "FROM authors";
+			ResultSet result1 = statement.executeQuery(query1);
+			if (result1.next()) {
+				maxResults = result1.getInt("COUNT(*)");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		closeConnection();
-		return authors;
+		return new Result<Author>(authors, maxResults);
 	}
 
 	@Override
@@ -86,11 +101,11 @@ public class DatabasePersistence implements BookstorePersistence {
 		int maxResults = 0;
 		openConnection();
 		try {
-			String query = "SELECT * " + 
-						   "FROM books " + 
-						   "ORDER BY title " + 
-						   "LIMIT ? " + 
-						   "OFFSET ? ";
+			String query = 	"SELECT * " + 
+							"FROM books " + 
+							"ORDER BY title " + 
+							"LIMIT ? " + 
+							"OFFSET ? ";
 			PreparedStatement preparedStatement = connection
 					.prepareStatement(query);
 			preparedStatement.setLong(1, limit);
@@ -103,8 +118,7 @@ public class DatabasePersistence implements BookstorePersistence {
 				book.setReleaseYear(result.getInt("releaseYear"));
 				books.add(book);
 			}
-			String query1 = "SELECT COUNT(*) " + 
-							"FROM books";
+			String query1 = "SELECT COUNT(*) " + "FROM books";
 			ResultSet result1 = statement.executeQuery(query1);
 			if (result1.next()) {
 				maxResults = result1.getInt("COUNT(*)");

@@ -8,18 +8,18 @@ import rs.ac.bg.fon.ai.milansusa.bookstore.model.Review;
 
 public interface BookstorePersistence {
 
-	Collection<Author> getAllAuthors();
+	Result<Author> getAllAuthors(int page, int limit);
 
 	Author getAuthor(long id);
 
 	Result<Book> getAllBooks(int page, int limit);
-	
+
 	Book getBook(long id);
 
 	Collection<Review> getAllReviews();
 
 	Review getReview(long id);
-	
+
 	Collection<Review> getBookReviews(long bookId);
 
 }

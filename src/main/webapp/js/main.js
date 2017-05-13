@@ -1,5 +1,4 @@
 var rootURL = "http://localhost:8080/rest/webapi";
-var currentAuthor, currentBook, currentReview;
 
 $(function() {
 	findAllAuthors();
@@ -12,7 +11,9 @@ function findAllAuthors() {
 		type : 'GET',
 		url : rootURL + '/authors',
 		dataType : "json",
-		success : function(authors) {
+		success : function(result) {
+			// var maxResults = result.pagination.maxResults;
+			var authors = result.data;
 			$.each(authors, function(index, author) {
 				$('#tAuthors').append(
 						'<tr><td>' + author.id + '</td><td>' + author.firstName
@@ -29,7 +30,7 @@ function findAllBooks() {
 		url : rootURL + '/books',
 		dataType : "json",
 		success : function(result) {
-			var maxResults = result.pagination.maxResults;
+			// var maxResults = result.pagination.maxResults;
 			var books = result.data;
 			$.each(books, function(index, book) {
 				$('#tBooks')
