@@ -1,17 +1,20 @@
 package rs.ac.bg.fon.ai.milansusa.bookstore.rest.json;
 
-import java.util.Collection;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Review;
+import rs.ac.bg.fon.ai.milansusa.bookstore.persistance.Result;
 
 public class ReviewJsonSerializer {
 
-	public static String serializeReviews(Collection<Review> allReviews) {
+	public static String serializeReviews(Result<Review> allReviews) {
+		JsonObject result = new JsonObject();
+		JsonObject pagination = new JsonObject();
+		pagination.addProperty("maxResults",
+				String.valueOf(allReviews.getMaxResults()));
+		result.add("pagination", pagination);
 		JsonArray reviewsArray = new JsonArray();
-		for (Review review : allReviews) {
+		for (Review review : allReviews.getData()) {
 			JsonObject reviewJson = new JsonObject();
 			reviewJson.addProperty("id", String.valueOf(review.getId()));
 			reviewJson.addProperty("reviewerFirstName",
@@ -23,7 +26,8 @@ public class ReviewJsonSerializer {
 					String.valueOf(review.getCreated()));
 			reviewsArray.add(reviewJson);
 		}
-		return reviewsArray.toString();
+		result.add("data", reviewsArray);
+		return result.toString();
 	}
 
 }

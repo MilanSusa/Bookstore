@@ -16,7 +16,7 @@ public interface BookstorePersistence {
 
 	Book getBook(long id);
 
-	Collection<Review> getAllReviews();
+	Result<Review> getAllReviews(int page, int limit);
 
 	Review getReview(long id);
 

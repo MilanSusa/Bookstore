@@ -8,9 +8,11 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Review;
+import rs.ac.bg.fon.ai.milansusa.bookstore.persistance.Result;
 import rs.ac.bg.fon.ai.milansusa.bookstore.rest.json.ReviewJsonSerializer;
 import rs.ac.bg.fon.ai.milansusa.bookstore.services.ReviewService;
 
@@ -22,9 +24,16 @@ public class ReviewResource {
 	private ReviewService reviewService = new ReviewService();
 
 	@GET
-	public String getReviews() {
-		Collection<Review> allReviews = reviewService.getAllReviews();
-		String response = ReviewJsonSerializer.serializeReviews(allReviews);
+	public String getReviews(@QueryParam("limit") int limit,
+			@QueryParam("page") int page) {
+		if (limit == 0) {
+			limit = 10;
+		}
+		if (page == 0) {
+			page = 1;
+		}
+		Result<Review> result = reviewService.getAllReviews(page, limit);
+		String response = ReviewJsonSerializer.serializeReviews(result);
 		return response;
 	}
 
@@ -34,7 +43,8 @@ public class ReviewResource {
 		Review review = reviewService.getReview(reviewId);
 		Collection<Review> reviewHolder = new LinkedList<>();
 		reviewHolder.add(review);
-		String response = ReviewJsonSerializer.serializeReviews(reviewHolder);
+		String response = ReviewJsonSerializer.serializeReviews(new Result<>(
+				reviewHolder, 1));
 		return response;
 	}
 

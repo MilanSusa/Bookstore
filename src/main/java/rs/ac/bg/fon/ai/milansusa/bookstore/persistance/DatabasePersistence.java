@@ -42,11 +42,8 @@ public class DatabasePersistence implements BookstorePersistence {
 		int maxResults = 0;
 		openConnection();
 		try {
-			String query = 	"SELECT * " + 
-							"FROM authors " + 
-							"ORDER BY lastName " + 
-							"LIMIT ? " + 
-							"OFFSET ? ";
+			String query = "SELECT * " + "FROM authors " + "ORDER BY lastName "
+					+ "LIMIT ? " + "OFFSET ? ";
 			PreparedStatement preparedStatement = connection
 					.prepareStatement(query);
 			preparedStatement.setLong(1, limit);
@@ -101,11 +98,8 @@ public class DatabasePersistence implements BookstorePersistence {
 		int maxResults = 0;
 		openConnection();
 		try {
-			String query = 	"SELECT * " + 
-							"FROM books " + 
-							"ORDER BY title " + 
-							"LIMIT ? " + 
-							"OFFSET ? ";
+			String query = "SELECT * " + "FROM books " + "ORDER BY title "
+					+ "LIMIT ? " + "OFFSET ? ";
 			PreparedStatement preparedStatement = connection
 					.prepareStatement(query);
 			preparedStatement.setLong(1, limit);
@@ -153,11 +147,18 @@ public class DatabasePersistence implements BookstorePersistence {
 	}
 
 	@Override
-	public Collection<Review> getAllReviews() {
+	public Result<Review> getAllReviews(int page, int limit) {
 		Collection<Review> reviews = new LinkedList<>();
+		int maxResults = 0;
 		openConnection();
 		try {
-			ResultSet result = statement.executeQuery("SELECT * FROM reviews");
+			String query = "SELECT * " + "FROM reviews " + "ORDER BY rank "
+					+ "LIMIT ? " + "OFFSET ? ";
+			PreparedStatement preparedStatement = connection
+					.prepareStatement(query);
+			preparedStatement.setLong(1, limit);
+			preparedStatement.setLong(2, (page - 1) * limit);
+			ResultSet result = preparedStatement.executeQuery();
 			while (result.next()) {
 				Review review = new Review();
 				review.setId(result.getLong("id"));
@@ -169,11 +170,16 @@ public class DatabasePersistence implements BookstorePersistence {
 				review.setCreated(result.getDate("created"));
 				reviews.add(review);
 			}
+			String query1 = "SELECT COUNT(*) " + "FROM reviews";
+			ResultSet result1 = statement.executeQuery(query1);
+			if (result1.next()) {
+				maxResults = result1.getInt("COUNT(*)");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		closeConnection();
-		return reviews;
+		return new Result<>(reviews, maxResults);
 	}
 
 	@Override

@@ -52,12 +52,14 @@ public class BookResource {
 		return response;
 	}
 
+	// Refactoring needed (add limit and offset)
 	@GET
 	@Path("/{id}/reviews")
 	public String getBookReviews(@PathParam("id") long bookId) {
 		Collection<Review> allBookReviews = reviewService
 				.getReviewsForBook(bookId);
-		String response = ReviewJsonSerializer.serializeReviews(allBookReviews);
+		String response = ReviewJsonSerializer.serializeReviews(new Result<>(
+				allBookReviews, Integer.MAX_VALUE));
 		return response;
 	}
 

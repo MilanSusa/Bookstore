@@ -48,7 +48,9 @@ function findAllReviews() {
 		type : 'GET',
 		url : rootURL + '/reviews',
 		dataType : "json",
-		success : function(reviews) {
+		success : function(result) {
+			// var maxResults = result.pagination.maxResults;
+			var reviews = result.data;
 			$.each(reviews, function(index, review) {
 				$('#tReviews').append(
 						'<tr><td>' + review.id + '</td><td>'
