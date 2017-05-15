@@ -9,8 +9,8 @@ public class BookService {
 
 	private BookstorePersistence persistance = new DatabasePersistence();
 
-	public Result<Book> getAllBooks(int page, int limit) {
-		return persistance.getAllBooks(page, limit);
+	public Result<Book> getAllBooks(int page, int limit, String query) {
+		return persistance.getAllBooks(page, limit, query);
 	}
 
 	public Book getBook(long bookId) {

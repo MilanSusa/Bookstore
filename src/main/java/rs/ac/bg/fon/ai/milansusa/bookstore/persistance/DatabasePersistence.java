@@ -93,15 +93,24 @@ public class DatabasePersistence implements BookstorePersistence {
 	}
 
 	@Override
-	public Result<Book> getAllBooks(int page, int limit) {
+	public Result<Book> getAllBooks(int page, int limit, String query) {
 		Collection<Book> books = new LinkedList<>();
 		int maxResults = 0;
 		openConnection();
 		try {
-			String query = "SELECT * " + "FROM books " + "ORDER BY title "
-					+ "LIMIT ? " + "OFFSET ? ";
-			PreparedStatement preparedStatement = connection
-					.prepareStatement(query);
+			String q = 
+				"SELECT * " + 
+				"FROM books ";
+			
+			if (query != null && !query.isEmpty()) {
+				q += "WHERE title LIKE '" + query + "%' ";
+			}
+			
+			q += "ORDER BY title " +
+				 "LIMIT ? " + 
+				 "OFFSET ? ";
+			
+			PreparedStatement preparedStatement = connection.prepareStatement(q);
 			preparedStatement.setLong(1, limit);
 			preparedStatement.setLong(2, (page - 1) * limit);
 			ResultSet result = preparedStatement.executeQuery();
@@ -112,10 +121,18 @@ public class DatabasePersistence implements BookstorePersistence {
 				book.setReleaseYear(result.getInt("releaseYear"));
 				books.add(book);
 			}
-			String query1 = "SELECT COUNT(*) " + "FROM books";
-			ResultSet result1 = statement.executeQuery(query1);
+			
+			String q1 = 
+					"SELECT COUNT(*) AS bookCount " + 
+					"FROM books ";
+							
+			if (query != null && !query.isEmpty()) {
+				q1 += "WHERE title LIKE '" + query + "%' ";
+			}
+			
+			ResultSet result1 = statement.executeQuery(q1);
 			if (result1.next()) {
-				maxResults = result1.getInt("COUNT(*)");
+				maxResults = result1.getInt("bookCount");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -29,14 +29,14 @@ public class BookResource {
 
 	@GET
 	public String getBooks(@QueryParam("limit") int limit,
-			@QueryParam("page") int page) {
+			@QueryParam("page") int page, @QueryParam("query") String query) {
 		if (limit == 0) {
-			limit = 10;
+			limit = 1;
 		}
 		if (page == 0) {
 			page = 1;
 		}
-		Result<Book> result = bookService.getAllBooks(page, limit);
+		Result<Book> result = bookService.getAllBooks(page, limit, query);
 		String response = BookJsonSerializer.serializeBooks(result);
 		return response;
 	}
