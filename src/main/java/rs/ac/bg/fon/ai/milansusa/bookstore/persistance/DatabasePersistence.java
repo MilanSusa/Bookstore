@@ -60,11 +60,11 @@ public class DatabasePersistence implements BookstorePersistence {
 				author.setGender(Gender.valueOf(result.getString("gender")));
 				authors.add(author);
 			}
-			String query1 = "SELECT COUNT(*) AS authorCount" + 
+			String query1 = "SELECT COUNT(*)" + 
 							"FROM authors";
 			ResultSet result1 = statement.executeQuery(query1);
 			if (result1.next()) {
-				maxResults = result1.getInt("authorCount");
+				maxResults = result1.getInt("COUNT(*)");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -129,7 +129,7 @@ public class DatabasePersistence implements BookstorePersistence {
 				books.add(book);
 			}
 			
-			String q1 = "SELECT COUNT(*) AS bookCount " + 
+			String q1 = "SELECT COUNT(*)" + 
 						"FROM books ";
 							
 			if (query != null && !query.isEmpty()) {
@@ -138,7 +138,7 @@ public class DatabasePersistence implements BookstorePersistence {
 			
 			ResultSet result1 = statement.executeQuery(q1);
 			if (result1.next()) {
-				maxResults = result1.getInt("bookCount");
+				maxResults = result1.getInt("COUNT(*)");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -197,11 +197,11 @@ public class DatabasePersistence implements BookstorePersistence {
 				review.setCreated(result.getDate("created"));
 				reviews.add(review);
 			}
-			String query1 = "SELECT COUNT(*) AS reviewCount" + 
+			String query1 = "SELECT COUNT(*)" + 
 							"FROM reviews";
 			ResultSet result1 = statement.executeQuery(query1);
 			if (result1.next()) {
-				maxResults = result1.getInt("reviewCount");
+				maxResults = result1.getInt("COUNT(*)");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

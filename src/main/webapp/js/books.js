@@ -1,11 +1,11 @@
-var rootURL = "http://localhost:8080/webapi";
+var rootURL = "http://localhost:8080/rest/webapi";
 
 $(function() {
 	findAllBooks('', 1);
 });
 
 function findAllBooks(query, page) {
-	if (!page)
+	if (page == 0)
 		page = 1;
 
 	var booksURL = rootURL + '/books';
