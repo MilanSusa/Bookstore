@@ -11,8 +11,8 @@ public class ReviewService {
 
 	private BookstorePersistence persistance = new DatabasePersistence();
 
-	public Result<Review> getAllReviews(int page, int limit) {
-		return persistance.getAllReviews(page, limit);
+	public Result<Review> getAllReviews(int page, int limit, String query) {
+		return persistance.getAllReviews(page, limit, query);
 	}
 
 	public Review getReview(long reviewId) {

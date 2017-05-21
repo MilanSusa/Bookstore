@@ -25,14 +25,14 @@ public class AuthorResource {
 
 	@GET
 	public String getAuthors(@QueryParam("limit") int limit,
-			@QueryParam("page") int page) {
+			@QueryParam("page") int page, @QueryParam("query") String query) {
 		if (limit == 0) {
 			limit = 10;
 		}
 		if (page == 0) {
 			page = 1;
 		}
-		Result<Author> result = authorService.getAllAuthors(page, limit);
+		Result<Author> result = authorService.getAllAuthors(page, limit, query);
 		String response = AuthorJsonSerializer.serializeAuthors(result);
 		return response;
 	}

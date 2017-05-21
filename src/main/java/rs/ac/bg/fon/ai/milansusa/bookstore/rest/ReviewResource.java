@@ -25,14 +25,14 @@ public class ReviewResource {
 
 	@GET
 	public String getReviews(@QueryParam("limit") int limit,
-			@QueryParam("page") int page) {
+			@QueryParam("page") int page, @QueryParam("query") String query) {
 		if (limit == 0) {
 			limit = 10;
 		}
 		if (page == 0) {
 			page = 1;
 		}
-		Result<Review> result = reviewService.getAllReviews(page, limit);
+		Result<Review> result = reviewService.getAllReviews(page, limit, query);
 		String response = ReviewJsonSerializer.serializeReviews(result);
 		return response;
 	}

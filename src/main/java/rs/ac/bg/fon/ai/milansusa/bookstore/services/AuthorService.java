@@ -9,8 +9,8 @@ public class AuthorService {
 
 	private BookstorePersistence persistance = new DatabasePersistence();
 
-	public Result<Author> getAllAuthors(int page, int limit) {
-		return persistance.getAllAuthors(page, limit);
+	public Result<Author> getAllAuthors(int page, int limit, String query) {
+		return persistance.getAllAuthors(page, limit, query);
 	}
 
 	public Author getAuthor(long authorId) {

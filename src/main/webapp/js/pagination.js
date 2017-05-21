@@ -2,8 +2,7 @@ function generatePagination(container, listFunction, maxResults, query, page, li
 	var pages = Math.floor(maxResults / limit);
 	
 	$(container).empty();
-	var prevClazz = (page-1) == 0 ? 'disabled' : '';
-	
+	// var prevClazz = (page-1) == 0 ? 'disabled' : '';
 	
 	if ((page-1) == 0) {
 		$(container).append('<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>');

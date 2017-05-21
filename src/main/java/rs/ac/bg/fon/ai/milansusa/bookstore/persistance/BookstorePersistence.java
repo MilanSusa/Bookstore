@@ -8,7 +8,7 @@ import rs.ac.bg.fon.ai.milansusa.bookstore.model.Review;
 
 public interface BookstorePersistence {
 
-	Result<Author> getAllAuthors(int page, int limit);
+	Result<Author> getAllAuthors(int page, int limit, String query);
 
 	Author getAuthor(long id);
 
@@ -16,7 +16,7 @@ public interface BookstorePersistence {
 
 	Book getBook(long id);
 
-	Result<Review> getAllReviews(int page, int limit);
+	Result<Review> getAllReviews(int page, int limit, String query);
 
 	Review getReview(long id);
 
