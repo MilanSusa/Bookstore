@@ -8,17 +8,18 @@ public class Book {
 	private long id;
 	private String title;
 	private int releaseYear;
-	private Set<Author> authors = new HashSet<>();
+	private String author;
 	private Set<Review> reviews = new HashSet<>();
 
 	public Book() {
 
 	}
 
-	public Book(long id, String title, int releaseYear) {
+	public Book(long id, String title, int releaseYear, String author) {
 		this.id = id;
 		this.title = title;
 		this.releaseYear = releaseYear;
+		this.author = author;
 	}
 
 	public long getId() {
@@ -45,12 +46,12 @@ public class Book {
 		this.releaseYear = releaseYear;
 	}
 
-	public Set<Author> getAuthors() {
-		return authors;
+	public String getAuthor() {
+		return author;
 	}
 
-	public void setAuthors(Set<Author> authors) {
-		this.authors = authors;
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 
 	public Set<Review> getReviews() {
@@ -64,7 +65,7 @@ public class Book {
 	@Override
 	public String toString() {
 		return "Book [id=" + id + ", title=" + title + ", releaseYear="
-				+ releaseYear + "]";
+				+ releaseYear + ", author=" + author + "]";
 	}
 
 }

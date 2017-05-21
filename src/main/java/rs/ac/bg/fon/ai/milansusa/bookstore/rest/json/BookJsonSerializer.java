@@ -20,6 +20,7 @@ public class BookJsonSerializer {
 			bookJson.addProperty("title", book.getTitle());
 			bookJson.addProperty("releaseYear",
 					String.valueOf(book.getReleaseYear()));
+			bookJson.addProperty("author", book.getAuthor());
 			booksArray.add(bookJson);
 		}
 		result.add("data", booksArray);

@@ -5,10 +5,11 @@ $(function() {
 });
 
 function findAllBooks(query, page) {
-	if (!page) page = 1;
-	
+	if (!page)
+		page = 1;
+
 	var booksURL = rootURL + '/books';
-	
+
 	$.ajax({
 		type : 'GET',
 		url : booksURL + '?query=' + query + '&page=' + page,
@@ -16,16 +17,17 @@ function findAllBooks(query, page) {
 		success : function(result) {
 			var maxResults = result.pagination.maxResults;
 			var books = result.data;
-			
+
 			$('#tBooks').empty();
 			$.each(books, function(index, book) {
 				$('#tBooks').append(
-								'<tr><td>' + book.id + '</td><td>' + book.title
-										+ '</td><td>' + book.releaseYear
-										+ '<td/></tr>');
+						'<tr><td>' + book.title + '</td><td>'
+								+ book.releaseYear + '</td><td>' + book.author
+								+ '<td/></tr>');
 			});
-			
-			generatePagination('#pagination', 'findAllBooks', query, maxResults, page, 1);
+
+			generatePagination('#pagination', 'findAllBooks', query,
+					maxResults, page, 1);
 		}
 	});
 }

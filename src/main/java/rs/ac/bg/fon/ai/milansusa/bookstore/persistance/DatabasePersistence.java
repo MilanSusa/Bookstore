@@ -42,8 +42,11 @@ public class DatabasePersistence implements BookstorePersistence {
 		int maxResults = 0;
 		openConnection();
 		try {
-			String query = "SELECT * " + "FROM authors " + "ORDER BY lastName "
-					+ "LIMIT ? " + "OFFSET ? ";
+			String query = "SELECT * " + 
+							"FROM authors " + 
+							"ORDER BY lastName " + 
+							"LIMIT ? " + 
+							"OFFSET ? ";
 			PreparedStatement preparedStatement = connection
 					.prepareStatement(query);
 			preparedStatement.setLong(1, limit);
@@ -57,10 +60,11 @@ public class DatabasePersistence implements BookstorePersistence {
 				author.setGender(Gender.valueOf(result.getString("gender")));
 				authors.add(author);
 			}
-			String query1 = "SELECT COUNT(*) " + "FROM authors";
+			String query1 = "SELECT COUNT(*) AS authorCount" + 
+							"FROM authors";
 			ResultSet result1 = statement.executeQuery(query1);
 			if (result1.next()) {
-				maxResults = result1.getInt("COUNT(*)");
+				maxResults = result1.getInt("authorCount");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -72,7 +76,9 @@ public class DatabasePersistence implements BookstorePersistence {
 	@Override
 	public Author getAuthor(long id) {
 		Author author = new Author();
-		String query = "SELECT * FROM authors WHERE id = ?";
+		String query = "SELECT * " + 
+						"FROM authors " + 
+						"WHERE id = ?";
 		openConnection();
 		try {
 			PreparedStatement preparedStatement = connection
@@ -119,12 +125,12 @@ public class DatabasePersistence implements BookstorePersistence {
 				book.setId(result.getLong("id"));
 				book.setTitle(result.getString("title"));
 				book.setReleaseYear(result.getInt("releaseYear"));
+				book.setAuthor(result.getString("author"));
 				books.add(book);
 			}
 			
-			String q1 = 
-					"SELECT COUNT(*) AS bookCount " + 
-					"FROM books ";
+			String q1 = "SELECT COUNT(*) AS bookCount " + 
+						"FROM books ";
 							
 			if (query != null && !query.isEmpty()) {
 				q1 += "WHERE title LIKE '" + query + "%' ";
@@ -155,6 +161,7 @@ public class DatabasePersistence implements BookstorePersistence {
 				book.setId(result.getLong("id"));
 				book.setTitle(result.getString("title"));
 				book.setReleaseYear(result.getInt("releaseYear"));
+				book.setAuthor(result.getString("author"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -169,8 +176,11 @@ public class DatabasePersistence implements BookstorePersistence {
 		int maxResults = 0;
 		openConnection();
 		try {
-			String query = "SELECT * " + "FROM reviews " + "ORDER BY rank "
-					+ "LIMIT ? " + "OFFSET ? ";
+			String query = "SELECT * " + 
+							"FROM reviews " + 
+							"ORDER BY rank " + 
+							"LIMIT ? " + 
+							"OFFSET ? ";
 			PreparedStatement preparedStatement = connection
 					.prepareStatement(query);
 			preparedStatement.setLong(1, limit);
@@ -187,10 +197,11 @@ public class DatabasePersistence implements BookstorePersistence {
 				review.setCreated(result.getDate("created"));
 				reviews.add(review);
 			}
-			String query1 = "SELECT COUNT(*) " + "FROM reviews";
+			String query1 = "SELECT COUNT(*) AS reviewCount" + 
+							"FROM reviews";
 			ResultSet result1 = statement.executeQuery(query1);
 			if (result1.next()) {
-				maxResults = result1.getInt("COUNT(*)");
+				maxResults = result1.getInt("reviewCount");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

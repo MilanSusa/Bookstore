@@ -31,7 +31,7 @@ public class BookResource {
 	public String getBooks(@QueryParam("limit") int limit,
 			@QueryParam("page") int page, @QueryParam("query") String query) {
 		if (limit == 0) {
-			limit = 1;
+			limit = 10;
 		}
 		if (page == 0) {
 			page = 1;
