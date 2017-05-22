@@ -188,7 +188,7 @@ public class DatabasePersistence implements BookstorePersistence {
 			String q = "SELECT * " + 
 						"FROM reviews ";
 			if (query != null && !query.isEmpty()) {
-				q += "WHERE reviewerLastName LIKE '" + query + "%' ";
+				q += "WHERE reviewersLastName LIKE '" + query + "%' ";
 			}
 			q +="ORDER BY rank " + 
 				"LIMIT ? " + 
@@ -213,7 +213,7 @@ public class DatabasePersistence implements BookstorePersistence {
 						"FROM reviews";
 			
 			if (query != null && !query.isEmpty()) {
-				q1 += "WHERE reviewerLastName LIKE '" + query + "%' ";
+				q1 += "WHERE reviewersLastName LIKE '" + query + "%' ";
 			}
 			ResultSet result1 = statement.executeQuery(q1);
 			if (result1.next()) {
