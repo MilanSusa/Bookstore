@@ -1,4 +1,4 @@
-var rootURL = "http://localhost:8080/rest/webapi";
+var rootURL = "http://localhost:8080/webapi";
 
 $(function() {
 	findAllBooks(1, '');
@@ -23,7 +23,7 @@ function findAllBooks(page, query) {
 								+ '<td/></tr>');
 			});
 			generatePagination('#pagination', 'findAllBooks', maxResults,
-					query, page, 1);
+					query, page, 10);
 		}
 	});
 }

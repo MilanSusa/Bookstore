@@ -3,6 +3,8 @@ package rs.ac.bg.fon.ai.milansusa.bookstore.persistance;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.sql.*;
+
+import rs.ac.bg.fon.ai.milansusa.bookstore.config.Settings;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Author;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Book;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Review;
@@ -10,18 +12,17 @@ import rs.ac.bg.fon.ai.milansusa.bookstore.model.enums.Gender;
 
 public class DatabasePersistence implements BookstorePersistence {
 
-	private final String database = "jdbc:mysql://localhost:3306/bookstore";
-	private final String username = "root";
-	private final String password = "root";
+	private final String database = Settings.getInstance().config.database.url;
+	private final String username = Settings.getInstance().config.database.username;
+	private final String password = Settings.getInstance().config.database.password;
 
-	Connection connection = null;
-	Statement statement = null;
+	private Connection connection = null;
+	private Statement statement = null;
 
 	private void openConnection() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			connection = DriverManager.getConnection(database, username,
-					password);
+			connection = DriverManager.getConnection(database, username, password);
 			statement = connection.createStatement();
 		} catch (Exception e) {
 			e.printStackTrace();
