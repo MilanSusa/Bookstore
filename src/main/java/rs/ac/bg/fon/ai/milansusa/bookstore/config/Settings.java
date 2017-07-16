@@ -14,21 +14,18 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class Settings {
-	
-	private static final Logger logger = LogManager.getLogger(Settings.class);
-	
-	
-	private static final String configFileName = "config.json";
 
+	private static final Logger logger = LogManager.getLogger(Settings.class);
+	private static final String configFileName = "config.json";
 	private static final String defaultConfigFilePath = "config/";
 
-	private static String absoluteConfigPath = System.getProperty("user.home") + File.separator + ".bookstore" + File.separator;
-
-	public Config config;
+	private static String absoluteConfigPath = System.getProperty("user.home")
+			+ File.separator + ".bookstore" + File.separator;
+	private static Settings INSTANCE;
 
 	private Gson gson;
 
-	private static Settings INSTANCE;
+	public Config config;
 
 	public static Settings getInstance() {
 		if (INSTANCE == null) {
@@ -68,10 +65,12 @@ public class Settings {
 			logger.info("Settings loaded!");
 		} catch (FileNotFoundException fnfe) {
 			throw new FileNotFoundException(
-					"Could not open the configuration file: " + configFileName + " - " + fnfe.getMessage());
+					"Could not open the configuration file: " + configFileName
+							+ " - " + fnfe.getMessage());
 		} catch (Exception e) {
 			logger.error(e);
-			throw new Exception("Could not serialize the configuration file: " + configFileName, e);
+			throw new Exception("Could not serialize the configuration file: "
+					+ configFileName, e);
 		}
 	}
 
@@ -86,7 +85,8 @@ public class Settings {
 			config = gson.fromJson(reader, Config.class);
 		} catch (Exception e) {
 			logger.error(e);
-			throw new Exception("Could not read the config file: " + configFileName, e);
+			throw new Exception("Could not read the config file: "
+					+ configFileName, e);
 		} finally {
 			if (null != reader) {
 				try {
@@ -116,7 +116,8 @@ public class Settings {
 
 			logger.info("Settings saved!");
 		} catch (Exception e) {
-			logger.error("Could not save the configuration file: " + configFileName, e);
+			logger.error("Could not save the configuration file: "
+					+ configFileName, e);
 		}
 	}
 

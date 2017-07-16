@@ -73,15 +73,26 @@
 				</div>
 				<!-- /.row -->
 
+				<script>
+					function executeSearch(inputField) {
+						var $this = this;
+
+						var delayedSearch = function() {
+							findAllReviews(1, $(inputField).val());
+						};
+
+						window.clearTimeout(this.keystrokeTimeout);
+						this.keystrokeTimeout = window.setTimeout(
+								delayedSearch, 250);
+					}
+				</script>
+
 				<div class="row">
 					<div class="col-lg-6">
 						<div class="input-group">
 							<input type="text" id="search" class="form-control"
-								placeholder="Search for..."> <span
-								class="input-group-btn">
-								<button class="btn btn-default" type="button"
-									onclick="searchReviews()">Search</button>
-							</span>
+								placeholder="Search for..." onkeyup="executeSearch(this)">
+							<span class="input-group-btn"> </span>
 						</div>
 						<!-- /input-group -->
 					</div>

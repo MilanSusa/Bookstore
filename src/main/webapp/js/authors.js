@@ -1,4 +1,4 @@
-var rootURL = "http://localhost:8080/rest/webapi";
+var rootURL = "http://localhost:8080/webapi";
 
 $(function() {
 	findAllAuthors(1, '');
@@ -22,7 +22,7 @@ function findAllAuthors(page, query) {
 								+ author.lastName + '</td></tr>');
 			});
 			generatePagination('#pagination', 'findAllAuthors', maxResults,
-					query, page, 1);
+					query, page, 10);
 		}
 	});
 }

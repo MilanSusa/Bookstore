@@ -72,7 +72,7 @@
 					</div>
 				</div>
 				<!-- /.row -->
-				
+
 				<script>
 					function executeSearch(inputField) {
 						var $this = this;
@@ -82,7 +82,8 @@
 						};
 
 						window.clearTimeout(this.keystrokeTimeout);
-						this.keystrokeTimeout = window.setTimeout(delayedSearch, 250);
+						this.keystrokeTimeout = window.setTimeout(
+								delayedSearch, 250);
 					}
 				</script>
 
@@ -90,10 +91,8 @@
 					<div class="col-lg-6">
 						<div class="input-group">
 							<input type="text" id="search" class="form-control"
-								placeholder="Search for..."
-								onkeyup="executeSearch(this)"> <span
-								class="input-group-btn">
-							</span>
+								placeholder="Search for..." onkeyup="executeSearch(this)">
+							<span class="input-group-btn"> </span>
 						</div>
 						<!-- /input-group -->
 					</div>

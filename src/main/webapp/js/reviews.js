@@ -1,4 +1,4 @@
-var rootURL = "http://localhost:8080/rest/webapi";
+var rootURL = "http://localhost:8080/webapi";
 
 $(function() {
 	findAllReviews(1, '');
@@ -24,7 +24,7 @@ function findAllReviews(page, query) {
 								+ '</td></tr>');
 			});
 			generatePagination('#pagination', 'findAllReviews', maxResults,
-					query, page, 1);
+					query, page, 10);
 		}
 	});
 }
