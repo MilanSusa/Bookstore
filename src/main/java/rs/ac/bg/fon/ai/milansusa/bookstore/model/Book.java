@@ -2,13 +2,23 @@ package rs.ac.bg.fon.ai.milansusa.bookstore.model;
 
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
+@Entity
+@Table(name = "books")
 public class Book {
 
+	@Id
+	@GeneratedValue
 	private long id;
 	private String title;
 	private int releaseYear;
 	private String author;
+	@Transient
 	private Set<Review> reviews = new HashSet<>();
 
 	public Book() {
@@ -19,7 +29,6 @@ public class Book {
 		this.id = id;
 		this.title = title;
 		this.releaseYear = releaseYear;
-		this.author = author;
 	}
 
 	public long getId() {
@@ -46,20 +55,20 @@ public class Book {
 		this.releaseYear = releaseYear;
 	}
 
-	public String getAuthor() {
-		return author;
-	}
-
-	public void setAuthor(String author) {
-		this.author = author;
-	}
-
 	public Set<Review> getReviews() {
 		return reviews;
 	}
 
 	public void setReviews(Set<Review> reviews) {
 		this.reviews = reviews;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 
 	@Override

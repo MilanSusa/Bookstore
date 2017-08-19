@@ -1,14 +1,25 @@
 package rs.ac.bg.fon.ai.milansusa.bookstore.model;
 
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
+@Entity
+@Table(name = "reviews")
 public class Review {
 
+	@Id
+	@GeneratedValue
 	private long id;
 	private String reviewerFistName;
 	private String reviewerLastName;
 	private double rank;
 	private Date created;
+	@Transient
+	private Book book;
 
 	public Review() {
 
@@ -21,6 +32,14 @@ public class Review {
 		this.reviewerLastName = reviewerLastName;
 		this.rank = rank;
 		this.created = new Date();
+	}
+
+	public Book getBook() {
+		return book;
+	}
+
+	public void setBook(Book book) {
+		this.book = book;
 	}
 
 	public long getId() {
