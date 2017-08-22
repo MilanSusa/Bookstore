@@ -1,6 +1,8 @@
 package rs.ac.bg.fon.ai.milansusa.bookstore.model;
 
 import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,7 +16,9 @@ public class Review {
 	@Id
 	@GeneratedValue
 	private long id;
+	@Column(name = "reviewersFirstName")
 	private String reviewerFistName;
+	@Column(name = "reviewersLastName")
 	private String reviewerLastName;
 	private double rank;
 	private Date created;
