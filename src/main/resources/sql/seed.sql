@@ -16,83 +16,84 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `authors`
+-- Table structure for table `author`
 --
 
-DROP TABLE IF EXISTS `authors`;
+DROP TABLE IF EXISTS `author`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `authors` (
+CREATE TABLE `author` (
   `id` bigint(11) NOT NULL,
-  `firstName` varchar(45) DEFAULT NULL,
-  `lastName` varchar(45) DEFAULT NULL,
-  `gender` enum('MALE','FEMALE') DEFAULT NULL,
+  `firstName` varchar(45) NOT NULL,
+  `lastName` varchar(45) NOT NULL,
+  `gender` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `authors`
+-- Dumping data for table `author`
 --
 
-LOCK TABLES `authors` WRITE;
-/*!40000 ALTER TABLE `authors` DISABLE KEYS */;
-INSERT INTO `authors` VALUES (1,'Napoleon','Hill','MALE'),(2,'Ekhart','Tolle','MALE'),(3,'Jack','Canfield','MALE'),(4,'Timothy','Ferriss','MALE'),(5,'Norman','Vincent','MALE'),(6,'Charles','Duhigg','MALE'),(7,'Anthony','Robbins','MALE'),(8,'Rhonda','Byrne','FEMALE'),(9,'Marianne','Williamson','FEMALE'),(10,'David','Burns','MALE'),(11,'Stephen','Covey','MALE'),(12,'Gretchen','Rubin','FEMALE'),(13,'Louise','Hay','FEMALE');
-/*!40000 ALTER TABLE `authors` ENABLE KEYS */;
+LOCK TABLES `author` WRITE;
+/*!40000 ALTER TABLE `author` DISABLE KEYS */;
+INSERT INTO `author` VALUES (1,'Napoleon','Hill','0'),(2,'Ekhart','Tolle','0'),(3,'Jack','Canfield','0'),(4,'Timothy','Ferriss','0'),(5,'Norman','Vincent','0'),(6,'Charles','Duhigg','0'),(7,'Anthony','Robbins','0'),(8,'Rhonda','Byrne','1'),(9,'Marianne','Williamson','1'),(10,'David','Burns','0'),(11,'Stephen','Covey','0'),(12,'Gretchen','Rubin','1'),(13,'Louise','Hay','1');
+/*!40000 ALTER TABLE `author` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `books`
+-- Table structure for table `book`
 --
 
-DROP TABLE IF EXISTS `books`;
+DROP TABLE IF EXISTS `book`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `books` (
+CREATE TABLE `book` (
   `id` bigint(10) NOT NULL,
-  `title` varchar(45) DEFAULT NULL,
-  `releaseYear` int(4) DEFAULT NULL,
-  `author` varchar(45) DEFAULT NULL,
+  `title` varchar(45) NOT NULL,
+  `releaseYear` int(4) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `books`
+-- Dumping data for table `book`
 --
 
-LOCK TABLES `books` WRITE;
-/*!40000 ALTER TABLE `books` DISABLE KEYS */;
-INSERT INTO `books` VALUES (1,'Think and Grow Rich',1937,'Napoleon Hill'),(2,'The Power of Now',1997,'Ekhart Tolle'),(3,'The Success Principles',2004,'Jack Canfield'),(4,'The 4-Hour Workweek',2007,'Timothy Ferriss'),(5,'The Power of Positive Thinking',1952,'Norman Vincent'),(6,'The Power of Habit',2012,'Charles Duhigg'),(7,'Unlimited Power',1986,'Anthony Robbins'),(8,'The Power',2010,'Rhonda Byrne'),(9,'Tears to Triumph',2016,'Marianne Williamson'),(10,'Feeling Good',1980,'David Burns'),(11,'The 7 Habits of Highly Effective People',1989,'Stephen Covey'),(12,'Better Than Before',2015,'Gretchen Rubin'),(13,'I Think, I Am',2008,'Louise Hay');
-/*!40000 ALTER TABLE `books` ENABLE KEYS */;
+LOCK TABLES `book` WRITE;
+/*!40000 ALTER TABLE `book` DISABLE KEYS */;
+INSERT INTO `book` VALUES (1,'Think and Grow Rich',1937),(2,'The Power of Now',1997),(3,'The Success Principles',2004),(4,'The 4-Hour Workweek',2007),(5,'The Power of Positive Thinking',1952),(6,'The Power of Habit',2012),(7,'Unlimited Power',1986),(8,'The Power',2010),(9,'Tears to Triumph',2016),(10,'Feeling Good',1980),(11,'The 7 Habits of Highly Effective People',1989),(12,'Better Than Before',2015),(13,'I Think, I Am',2008);
+/*!40000 ALTER TABLE `book` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `reviews`
+-- Table structure for table `review`
 --
 
-DROP TABLE IF EXISTS `reviews`;
+DROP TABLE IF EXISTS `review`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `reviews` (
+CREATE TABLE `review` (
   `id` bigint(20) NOT NULL,
-  `reviewersFirstName` varchar(45) DEFAULT NULL,
-  `reviewersLastName` varchar(45) DEFAULT NULL,
-  `rank` decimal(10,0) DEFAULT NULL,
-  `created` time DEFAULT NULL,
-  `bookId` int(20) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `reviewerFirstName` varchar(45) NOT NULL,
+  `reviewerLastName` varchar(45) NOT NULL,
+  `rank` decimal(10,0) NOT NULL,
+  `created` time NOT NULL,
+  `bookId` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKat7tquw52hvs84svjwfvl52rw` (`bookId`),
+  CONSTRAINT `FKat7tquw52hvs84svjwfvl52rw` FOREIGN KEY (`bookId`) REFERENCES `book` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `reviews`
+-- Dumping data for table `review`
 --
 
-LOCK TABLES `reviews` WRITE;
-/*!40000 ALTER TABLE `reviews` DISABLE KEYS */;
-INSERT INTO `reviews` VALUES (1,'Mika','Peric',9,'19:58:15',1),(2,'Jovana','Lazic',9,'19:59:43',2),(3,'Marko','Jovanovic',8,'18:43:12',3),(4,'Nevena','Mitic',8,'17:43:52',4),(5,'Luna','Jokic',9,'16:46:07',5),(6,'Jelena','Maric',10,'13:06:05',6),(7,'Nenad','Andric',9,'15:08:34',7),(8,'Jovan','Gocic',8,'17:34:02',8),(9,'Lazar','Maricic',9,'18:56:47',9),(10,'Ana','Nesic',9,'13:23:53',10),(11,'Marija','Petronijevic',10,'09:43:17',11),(12,'Milan','Jovanovic',9,'12:24:14',12),(13,'Petar','Bogdanovic',8,'16:15:13',13);
-/*!40000 ALTER TABLE `reviews` ENABLE KEYS */;
+LOCK TABLES `review` WRITE;
+/*!40000 ALTER TABLE `review` DISABLE KEYS */;
+INSERT INTO `review` VALUES (1,'Mika','Peric',9,'19:58:15',1),(2,'Jovana','Lazic',9,'19:59:43',2),(3,'Marko','Jovanovic',8,'18:43:12',3),(4,'Nevena','Mitic',8,'17:43:52',4),(5,'Luna','Jokic',9,'16:46:07',5),(6,'Jelena','Maric',10,'13:06:05',6),(7,'Nenad','Andric',9,'15:08:34',7),(8,'Jovan','Gocic',8,'17:34:02',8),(9,'Lazar','Maricic',9,'18:56:47',9),(10,'Ana','Nesic',9,'13:23:53',10),(11,'Marija','Petronijevic',10,'09:43:17',11),(12,'Milan','Jovanovic',9,'12:24:14',12),(13,'Petar','Bogdanovic',8,'16:15:13',13);
+/*!40000 ALTER TABLE `review` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -104,4 +105,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-20 13:15:37
+-- Dump completed on 2017-08-26 21:24:08

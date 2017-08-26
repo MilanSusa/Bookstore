@@ -1,9 +1,9 @@
 package rs.ac.bg.fon.ai.milansusa.bookstore.model;
 
 import java.util.HashSet;
+
 import java.util.Set;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -21,7 +21,6 @@ public class Author {
 	private long id;
 	private String firstName;
 	private String lastName;
-	@Column(nullable = false)
 	private Gender gender;
 	@ManyToMany
 	@JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "authorId"), inverseJoinColumns = @JoinColumn(name = "bookId"))
