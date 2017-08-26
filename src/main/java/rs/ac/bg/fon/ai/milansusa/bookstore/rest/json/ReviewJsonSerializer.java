@@ -18,7 +18,7 @@ public class ReviewJsonSerializer {
 			JsonObject reviewJson = new JsonObject();
 			reviewJson.addProperty("id", String.valueOf(review.getId()));
 			reviewJson.addProperty("reviewerFirstName",
-					review.getReviewerFistName());
+					review.getReviewerFirstName());
 			reviewJson.addProperty("reviewerLastName",
 					review.getReviewerLastName());
 			reviewJson.addProperty("rank", String.valueOf(review.getRank()));

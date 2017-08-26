@@ -2,14 +2,14 @@ package rs.ac.bg.fon.ai.milansusa.bookstore.model;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
-@Table(name = "books")
 public class Book {
 
 	@Id
@@ -17,12 +17,14 @@ public class Book {
 	private long id;
 	private String title;
 	private int releaseYear;
-	private String author;
-	@Transient
-	private Set<Review> reviews = new HashSet<>();
+	@ManyToMany(mappedBy = "books")
+	private Set<Author> authors;
+	@OneToMany(mappedBy = "book")
+	private Set<Review> reviews;
 
 	public Book() {
-
+		authors = new HashSet<>();
+		reviews = new HashSet<>();
 	}
 
 	public Book(long id, String title, int releaseYear, String author) {
@@ -63,18 +65,18 @@ public class Book {
 		this.reviews = reviews;
 	}
 
-	public String getAuthor() {
-		return author;
+	public Set<Author> getAuthors() {
+		return authors;
 	}
 
-	public void setAuthor(String author) {
-		this.author = author;
+	public void setAuthors(Set<Author> authors) {
+		this.authors = authors;
 	}
 
 	@Override
 	public String toString() {
 		return "Book [id=" + id + ", title=" + title + ", releaseYear="
-				+ releaseYear + ", author=" + author + "]";
+				+ releaseYear + "]";
 	}
 
 }

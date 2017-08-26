@@ -19,8 +19,7 @@ function findAllBooks(page, query) {
 			$.each(books, function(index, book) {
 				$('#tBooks').append(
 						'<tr><td>' + book.title + '</td><td>'
-								+ book.releaseYear + '</td><td>' + book.author
-								+ '<td/></tr>');
+								+ book.releaseYear + '</td></tr>');
 			});
 			generatePagination('#pagination', 'findAllBooks', maxResults,
 					query, page, 10);

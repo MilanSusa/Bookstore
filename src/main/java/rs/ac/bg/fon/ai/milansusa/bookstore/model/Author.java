@@ -2,15 +2,18 @@ package rs.ac.bg.fon.ai.milansusa.bookstore.model;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.enums.Gender;
 
 @Entity
-@Table(name = "authors")
 public class Author {
 
 	@Id
@@ -18,12 +21,14 @@ public class Author {
 	private long id;
 	private String firstName;
 	private String lastName;
+	@Column(nullable = false)
 	private Gender gender;
-	@Transient
-	private Set<Book> books = new HashSet<>();
+	@ManyToMany
+	@JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "authorId"), inverseJoinColumns = @JoinColumn(name = "bookId"))
+	private Set<Book> books;
 
 	public Author() {
-
+		books = new HashSet<>();
 	}
 
 	public Author(long id, String firstName, String lastName, Gender gender) {

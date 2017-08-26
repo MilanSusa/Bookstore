@@ -2,37 +2,34 @@ package rs.ac.bg.fon.ai.milansusa.bookstore.model;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
-@Table(name = "reviews")
 public class Review {
 
 	@Id
 	@GeneratedValue
 	private long id;
-	@Column(name = "reviewersFirstName")
-	private String reviewerFistName;
-	@Column(name = "reviewersLastName")
+	private String reviewerFirstName;
 	private String reviewerLastName;
 	private double rank;
 	private Date created;
-	@Transient
+	@ManyToOne
+	@JoinColumn(name = "bookId")
 	private Book book;
 
 	public Review() {
 
 	}
 
-	public Review(long id, String reviewerFistName, String reviewerLastName,
+	public Review(long id, String reviewerFirstName, String reviewerLastName,
 			double rank, Date created) {
 		this.id = id;
-		this.reviewerFistName = reviewerFistName;
+		this.reviewerFirstName = reviewerFirstName;
 		this.reviewerLastName = reviewerLastName;
 		this.rank = rank;
 		this.created = new Date();
@@ -54,12 +51,12 @@ public class Review {
 		this.id = id;
 	}
 
-	public String getReviewerFistName() {
-		return reviewerFistName;
+	public String getReviewerFirstName() {
+		return reviewerFirstName;
 	}
 
-	public void setReviewerFistName(String reviewerFistName) {
-		this.reviewerFistName = reviewerFistName;
+	public void setReviewerFirstName(String reviewerFirstName) {
+		this.reviewerFirstName = reviewerFirstName;
 	}
 
 	public String getReviewerLastName() {
@@ -88,7 +85,7 @@ public class Review {
 
 	@Override
 	public String toString() {
-		return "Review [id=" + id + ", reviewerFistName=" + reviewerFistName
+		return "Review [id=" + id + ", reviewerFirstName=" + reviewerFirstName
 				+ ", reviewerLastName=" + reviewerLastName + ", rank=" + rank
 				+ ", created=" + created + "]";
 	}
