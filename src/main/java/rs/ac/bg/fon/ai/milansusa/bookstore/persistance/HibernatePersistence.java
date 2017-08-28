@@ -94,7 +94,15 @@ public class HibernatePersistence implements BookstorePersistence {
 
 	@Override
 	public Result<Review> getBookReviews(long bookId, int page, int limit, String query) {
-		// TODO Auto-generated method stub
+		openSession();
+		String queryText = "FROM Review WHERE bookId = " + bookId + " AND reviewerLastName LIKE '" + query + "%' ORDER BY reviewerLastName";
+		Collection<Review> reviews = session.createQuery(queryText)
+											.setFirstResult((page - 1) * limit)
+											.setMaxResults(limit)
+											.list();
+		queryText = "FROM Review WHERE bookId = " + bookId + " AND reviewerLastName LIKE '" + query + "%'";
+		int maxResults = session.createQuery(queryText).list().size();
+		closeSession();
 		return null;
 	}
 
