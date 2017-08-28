@@ -20,8 +20,9 @@ public class ReviewService {
 		return persistance.getReview(reviewId);
 	}
 
-	public Collection<Review> getReviewsForBook(long bookId) {
-		return persistance.getBookReviews(bookId);
+	public Result<Review> getReviewsForBook(long bookId, int page, int limit,
+			String query) {
+		return persistance.getBookReviews(bookId, page, limit, query);
 	}
 
 }

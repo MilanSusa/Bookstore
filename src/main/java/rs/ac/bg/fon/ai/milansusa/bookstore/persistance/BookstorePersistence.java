@@ -20,6 +20,6 @@ public interface BookstorePersistence {
 
 	Review getReview(long id);
 
-	Collection<Review> getBookReviews(long bookId);
+	Result<Review> getBookReviews(long bookId, int page, int limit, String query);
 
 }

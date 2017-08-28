@@ -239,14 +239,22 @@ public class DatabasePersistence implements BookstorePersistence {
 	}
 
 	@Override
-	public Collection<Review> getBookReviews(long bookId) {
+	public Result<Review> getBookReviews(long bookId, int page, int limit,
+			String query) {
 		Collection<Review> reviews = new LinkedList<>();
-		String query = "SELECT * FROM reviews WHERE bookId = ?";
+		int maxResults = 0;
 		openConnection();
 		try {
+			String q = "SELECT * " + "FROM reviews WHERE bookId = ?";
+			if (query != null && !query.isEmpty()) {
+				q += "AND reviewersLastName LIKE '" + query + "%' ";
+			}
+			q += "ORDER BY rank " + "LIMIT ? " + "OFFSET ? ";
 			PreparedStatement preparedStatement = connection
-					.prepareStatement(query);
+					.prepareStatement(q);
 			preparedStatement.setLong(1, bookId);
+			preparedStatement.setLong(2, limit);
+			preparedStatement.setLong(3, (page - 1) * limit);
 			ResultSet result = preparedStatement.executeQuery();
 			while (result.next()) {
 				Review review = new Review();
@@ -259,11 +267,21 @@ public class DatabasePersistence implements BookstorePersistence {
 				review.setCreated(result.getDate("created"));
 				reviews.add(review);
 			}
+			String q1 = "SELECT COUNT(*)" + "FROM reviews WHERE bookId = ?";
+			if (query != null && !query.isEmpty()) {
+				q1 += "WHERE reviewersLastName LIKE '" + query + "%' ";
+			}
+			preparedStatement = connection.prepareStatement(q1);
+			preparedStatement.setLong(1, bookId);
+			ResultSet result1 = preparedStatement.executeQuery(q1);
+			if (result1.next()) {
+				maxResults = result1.getInt("COUNT(*)");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		closeConnection();
-		return reviews;
+		return new Result<>(reviews, maxResults);
 	}
 
 }

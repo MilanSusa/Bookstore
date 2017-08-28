@@ -93,7 +93,7 @@ public class HibernatePersistence implements BookstorePersistence {
 	}
 
 	@Override
-	public Collection<Review> getBookReviews(long bookId) {
+	public Result<Review> getBookReviews(long bookId, int page, int limit, String query) {
 		// TODO Auto-generated method stub
 		return null;
 	}
