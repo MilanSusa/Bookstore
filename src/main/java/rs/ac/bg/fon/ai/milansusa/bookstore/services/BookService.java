@@ -2,7 +2,6 @@ package rs.ac.bg.fon.ai.milansusa.bookstore.services;
 
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Book;
 import rs.ac.bg.fon.ai.milansusa.bookstore.persistance.BookstorePersistence;
-import rs.ac.bg.fon.ai.milansusa.bookstore.persistance.DatabasePersistence;
 import rs.ac.bg.fon.ai.milansusa.bookstore.persistance.HibernatePersistence;
 import rs.ac.bg.fon.ai.milansusa.bookstore.persistance.Result;
 

@@ -1,7 +1,5 @@
 package rs.ac.bg.fon.ai.milansusa.bookstore.persistance;
 
-import java.util.Collection;
-
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Author;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Book;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Review;
