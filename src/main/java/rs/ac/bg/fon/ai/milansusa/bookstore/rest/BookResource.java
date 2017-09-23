@@ -3,18 +3,13 @@ package rs.ac.bg.fon.ai.milansusa.bookstore.rest;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import rs.ac.bg.fon.ai.milansusa.bookstore.config.DIConfig;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Book;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Review;
 import rs.ac.bg.fon.ai.milansusa.bookstore.persistance.Result;
@@ -23,35 +18,36 @@ import rs.ac.bg.fon.ai.milansusa.bookstore.rest.json.ReviewJsonSerializer;
 import rs.ac.bg.fon.ai.milansusa.bookstore.services.BookService;
 import rs.ac.bg.fon.ai.milansusa.bookstore.services.ReviewService;
 
-@Path("/books")
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
-@Component
+@RestController
+@RequestMapping("/webapi/books")
 public class BookResource {
 
 	@Autowired
-	private BookService bookService = DIConfig.ctx.getBean(BookService.class);
+	private BookService bookService;
 	@Autowired
-	private ReviewService reviewService = DIConfig.ctx
-			.getBean(ReviewService.class);
+	private ReviewService reviewService;
 
-	@GET
-	public String getBooks(@QueryParam("limit") int limit,
-			@QueryParam("page") int page, @QueryParam("query") String query) {
-		if (limit == 0) {
+	@RequestMapping(method = RequestMethod.GET)
+	public String getBooks(
+			@RequestParam(value = "limit", required = false) Integer limit,
+			@RequestParam(value = "page", required = false) Integer page,
+			@RequestParam(value = "query", required = false) String query) {
+		if (limit == null || limit == 0) {
 			limit = 10;
 		}
-		if (page == 0) {
+		if (page == null || page == 0) {
 			page = 1;
+		}
+		if (query == null) {
+			query = "";
 		}
 		Result<Book> result = bookService.getAllBooks(page, limit, query);
 		String response = BookJsonSerializer.serializeBooks(result);
 		return response;
 	}
 
-	@GET
-	@Path("/{id}")
-	public String getBook(@PathParam("id") long bookId) {
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public String getBook(@PathVariable("id") long bookId) {
 		Book book = bookService.getBook(bookId);
 		Collection<Book> bookHolder = new LinkedList<Book>();
 		bookHolder.add(book);
@@ -60,16 +56,19 @@ public class BookResource {
 		return response;
 	}
 
-	@GET
-	@Path("/{id}/reviews")
-	public String getBookReviews(@PathParam("id") long bookId,
-			@QueryParam("limit") int limit, @QueryParam("page") int page,
-			@QueryParam("query") String query) {
-		if (limit == 0) {
+	@RequestMapping(value = "/{id}/reviews", method = RequestMethod.GET)
+	public String getBookReviews(@PathVariable("id") long bookId,
+			@RequestParam(value = "limit", required = false) Integer limit,
+			@RequestParam(value = "page", required = false) Integer page,
+			@RequestParam(value = "query", required = false) String query) {
+		if (limit == null || limit == 0) {
 			limit = 10;
 		}
-		if (page == 0) {
+		if (page == null || page == 0) {
 			page = 1;
+		}
+		if (query == null) {
+			query = "";
 		}
 		Result<Review> result = reviewService.getReviewsForBook(bookId, page,
 				limit, query);

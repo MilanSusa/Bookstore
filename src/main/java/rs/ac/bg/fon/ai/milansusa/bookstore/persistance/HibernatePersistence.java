@@ -1,15 +1,17 @@
 package rs.ac.bg.fon.ai.milansusa.bookstore.persistance;
 
-import java.util.Collection;
+import java.util.Collection; 
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.springframework.stereotype.Repository;
 
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Author;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Book;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Review;
 
+@Repository
 public class HibernatePersistence implements BookstorePersistence {
 
 	private final SessionFactory sessionFactory = new Configuration()
@@ -103,7 +105,7 @@ public class HibernatePersistence implements BookstorePersistence {
 		queryText = "FROM Review WHERE bookId = " + bookId + " AND reviewerLastName LIKE '" + query + "%'";
 		int maxResults = session.createQuery(queryText).list().size();
 		closeSession();
-		return null;
+		return new Result<>(reviews, maxResults);
 	}
 
 }
