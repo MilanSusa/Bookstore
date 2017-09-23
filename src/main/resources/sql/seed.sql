@@ -42,6 +42,32 @@ INSERT INTO `author` VALUES (1,'Napoleon','Hill','0'),(2,'Ekhart','Tolle','0'),(
 UNLOCK TABLES;
 
 --
+-- Table structure for table `author_book`
+--
+
+DROP TABLE IF EXISTS `author_book`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `author_book` (
+  `authorId` bigint(20) NOT NULL,
+  `bookId` bigint(20) NOT NULL,
+  PRIMARY KEY (`authorId`,`bookId`),
+  KEY `FKdg6286iyev5m58e4j6a7e058w` (`bookId`),
+  CONSTRAINT `FKdg6286iyev5m58e4j6a7e058w` FOREIGN KEY (`bookId`) REFERENCES `book` (`id`),
+  CONSTRAINT `FKnvtqx2anpyi9ddrn0nuwh1h05` FOREIGN KEY (`authorId`) REFERENCES `author` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `author_book`
+--
+
+LOCK TABLES `author_book` WRITE;
+/*!40000 ALTER TABLE `author_book` DISABLE KEYS */;
+/*!40000 ALTER TABLE `author_book` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `book`
 --
 
@@ -64,6 +90,28 @@ LOCK TABLES `book` WRITE;
 /*!40000 ALTER TABLE `book` DISABLE KEYS */;
 INSERT INTO `book` VALUES (1,'Think and Grow Rich',1937),(2,'The Power of Now',1997),(3,'The Success Principles',2004),(4,'The 4-Hour Workweek',2007),(5,'The Power of Positive Thinking',1952),(6,'The Power of Habit',2012),(7,'Unlimited Power',1986),(8,'The Power',2010),(9,'Tears to Triumph',2016),(10,'Feeling Good',1980),(11,'The 7 Habits of Highly Effective People',1989),(12,'Better Than Before',2015),(13,'I Think, I Am',2008);
 /*!40000 ALTER TABLE `book` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `hibernate_sequence`
+--
+
+DROP TABLE IF EXISTS `hibernate_sequence`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `hibernate_sequence` (
+  `next_val` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `hibernate_sequence`
+--
+
+LOCK TABLES `hibernate_sequence` WRITE;
+/*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
+INSERT INTO `hibernate_sequence` VALUES (1),(1),(1);
+/*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -105,4 +153,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-08-26 21:24:08
+-- Dump completed on 2017-09-23 17:41:45
