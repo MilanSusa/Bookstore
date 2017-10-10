@@ -3,6 +3,7 @@ package rs.ac.bg.fon.ai.milansusa.bookstore.persistance;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Author;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Book;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Review;
+import rs.ac.bg.fon.ai.milansusa.bookstore.model.User;
 
 public interface BookstorePersistence {
 
@@ -19,5 +20,7 @@ public interface BookstorePersistence {
 	Review getReview(long id);
 
 	Result<Review> getBookReviews(long bookId, int page, int limit, String query);
+
+	User getUser(String username);
 
 }

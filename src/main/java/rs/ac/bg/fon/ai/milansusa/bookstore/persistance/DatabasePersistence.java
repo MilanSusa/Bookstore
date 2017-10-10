@@ -8,6 +8,7 @@ import rs.ac.bg.fon.ai.milansusa.bookstore.config.Settings;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Author;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Book;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Review;
+import rs.ac.bg.fon.ai.milansusa.bookstore.model.User;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.enums.Gender;
 
 public class DatabasePersistence implements BookstorePersistence {
@@ -282,6 +283,12 @@ public class DatabasePersistence implements BookstorePersistence {
 		}
 		closeConnection();
 		return new Result<>(reviews, maxResults);
+	}
+
+	@Override
+	public User getUser(String username) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

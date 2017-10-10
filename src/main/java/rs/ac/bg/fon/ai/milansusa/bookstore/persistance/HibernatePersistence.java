@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Author;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Book;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Review;
+import rs.ac.bg.fon.ai.milansusa.bookstore.model.User;
 
 @Transactional
 @Service ("rs.ac.bg.fon.ai.milansusa.bookstore.persistance.BookstorePersistence")
@@ -34,8 +35,7 @@ public class HibernatePersistence implements BookstorePersistence {
 
 	@Override
 	public Author getAuthor(long id) {
-		Author author = (Author) sessionFactory.getCurrentSession().get(Author.class, id);
-		return author;
+		return (Author) sessionFactory.getCurrentSession().get(Author.class, id);
 	}
 
 	@Override
@@ -54,8 +54,7 @@ public class HibernatePersistence implements BookstorePersistence {
 
 	@Override
 	public Book getBook(long id) {
-		Book book = (Book) sessionFactory.getCurrentSession().get(Book.class, id);
-		return book;
+		return (Book) sessionFactory.getCurrentSession().get(Book.class, id);
 	}
 
 	@Override
@@ -74,8 +73,7 @@ public class HibernatePersistence implements BookstorePersistence {
 
 	@Override
 	public Review getReview(long id) {
-		Review review = (Review) sessionFactory.getCurrentSession().get(Review.class, id);
-		return review;
+		return (Review) sessionFactory.getCurrentSession().get(Review.class, id);
 	}
 
 	@Override
@@ -90,6 +88,12 @@ public class HibernatePersistence implements BookstorePersistence {
 		queryText = "FROM Review WHERE bookId = " + bookId + " AND reviewerLastName LIKE '" + query + "%'";
 		int maxResults = sessionFactory.getCurrentSession().createQuery(queryText).list().size();
 		return new Result<>(reviews, maxResults);
+	}
+	
+	@Override
+	public User getUser(String username) {
+		String queryText = "FROM User WHERE name = " + username;
+		return (User) sessionFactory.getCurrentSession().createQuery(queryText).uniqueResult();
 	}
 
 }
