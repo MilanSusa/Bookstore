@@ -6,32 +6,28 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import rs.ac.bg.fon.ai.milansusa.bookstore.services.CustomUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	private UserDetailsService userDetailsService;
+	private CustomUserDetailsService userDetailsService;
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-//		 http.authorizeRequests().antMatchers("/*").hasRole("USER").and()
-//		 .formLogin();
 		http.csrf().disable();
-		http.authorizeRequests().antMatchers("/**").authenticated()
-				.anyRequest().permitAll().and().formLogin().permitAll();
+		http.authorizeRequests().antMatchers("/**").authenticated().anyRequest().permitAll().and().formLogin()
+				.permitAll();
 	}
 
 	@Override
 	@Autowired
-	protected void configure(AuthenticationManagerBuilder auth)
-			throws Exception {
-		auth.userDetailsService(userDetailsService).passwordEncoder(
-				getPasswordEncoder());
-//		auth.inMemoryAuthentication().withUser("test").password("pass").roles("USER");
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(userDetailsService).passwordEncoder(getPasswordEncoder());
 	}
 
 	private PasswordEncoder getPasswordEncoder() {
@@ -49,4 +45,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		};
 	}
+
 }

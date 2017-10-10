@@ -143,6 +143,59 @@ LOCK TABLES `review` WRITE;
 INSERT INTO `review` VALUES (1,'Mika','Peric',9,'19:58:15',1),(2,'Jovana','Lazic',9,'19:59:43',2),(3,'Marko','Jovanovic',8,'18:43:12',3),(4,'Nevena','Mitic',8,'17:43:52',4),(5,'Luna','Jokic',9,'16:46:07',5),(6,'Jelena','Maric',10,'13:06:05',6),(7,'Nenad','Andric',9,'15:08:34',7),(8,'Jovan','Gocic',8,'17:34:02',8),(9,'Lazar','Maricic',9,'18:56:47',9),(10,'Ana','Nesic',9,'13:23:53',10),(11,'Marija','Petronijevic',10,'09:43:17',11),(12,'Milan','Jovanovic',9,'12:24:14',12),(13,'Petar','Bogdanovic',8,'16:15:13',13);
 /*!40000 ALTER TABLE `review` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `role`
+--
+
+DROP TABLE IF EXISTS `role`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `role` (
+  `roleId` int(11) NOT NULL,
+  `roleName` varchar(45) NOT NULL,
+  `userId` int(11) NOT NULL,
+  PRIMARY KEY (`roleId`),
+  KEY `FKdjnknm24nt462vrd3roe68i9c` (`userId`),
+  CONSTRAINT `FKdjnknm24nt462vrd3roe68i9c` FOREIGN KEY (`userId`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `role`
+--
+
+LOCK TABLES `role` WRITE;
+/*!40000 ALTER TABLE `role` DISABLE KEYS */;
+INSERT INTO `role` VALUES (1,'USER',1);
+/*!40000 ALTER TABLE `role` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `active` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user`
+--
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (1,'Milan','pass','true');
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -153,4 +206,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-23 17:41:45
+-- Dump completed on 2017-10-10 23:09:07

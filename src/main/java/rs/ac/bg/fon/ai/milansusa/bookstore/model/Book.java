@@ -73,10 +73,4 @@ public class Book {
 		this.authors = authors;
 	}
 
-	@Override
-	public String toString() {
-		return "Book [id=" + id + ", title=" + title + ", releaseYear="
-				+ releaseYear + "]";
-	}
-
 }

@@ -15,8 +15,7 @@ public class SpringConfig {
 
 	@Bean
 	@Autowired
-	public HibernateTransactionManager transactionManager(
-			SessionFactory sessionFactory) {
+	public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
 		HibernateTransactionManager txManager = new HibernateTransactionManager();
 		txManager.setSessionFactory(sessionFactory);
 

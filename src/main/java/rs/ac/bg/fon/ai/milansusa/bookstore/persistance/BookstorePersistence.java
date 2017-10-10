@@ -1,5 +1,7 @@
 package rs.ac.bg.fon.ai.milansusa.bookstore.persistance;
 
+import java.util.Optional;
+
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Author;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Book;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Review;
@@ -21,6 +23,5 @@ public interface BookstorePersistence {
 
 	Result<Review> getBookReviews(long bookId, int page, int limit, String query);
 
-	User getUser(String username);
-
+	Optional<User> getUser(String username);
 }

@@ -1,7 +1,7 @@
 package rs.ac.bg.fon.ai.milansusa.bookstore.model;
 
 import java.util.Collection;
-import java.util.List;
+
 import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -18,9 +18,8 @@ public class CustomUserDetails extends User implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-//		return getRoles().stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role.getRole())).collect(Collectors.toList());
-
-		return null;
+		return getRoles().stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role.getRoleName()))
+				.collect(Collectors.toList());
 	}
 
 	@Override

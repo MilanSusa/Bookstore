@@ -23,7 +23,7 @@ public class Author {
 	private String lastName;
 	private Gender gender;
 	@ManyToMany
-	@JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "authorId"), inverseJoinColumns = @JoinColumn(name = "bookId"))
+	@JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "authorId") , inverseJoinColumns = @JoinColumn(name = "bookId") )
 	private Set<Book> books;
 
 	public Author() {
@@ -75,12 +75,6 @@ public class Author {
 
 	public void setBooks(Set<Book> books) {
 		this.books = books;
-	}
-
-	@Override
-	public String toString() {
-		return "Author [id=" + id + ", firstName=" + firstName + ", lastName="
-				+ lastName + ", gender=" + gender + "]";
 	}
 
 }

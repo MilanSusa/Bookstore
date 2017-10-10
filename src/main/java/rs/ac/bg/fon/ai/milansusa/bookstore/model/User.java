@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -17,15 +18,14 @@ public class User {
 	private String name;
 	private String password;
 	private boolean active;
-	@OneToMany(mappedBy = "user")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
 	private Set<Role> roles;
 
 	public User() {
 		roles = new HashSet<>();
 	}
 
-	public User(int id, String name, String password, String email,
-			boolean active) {
+	public User(int id, String name, String password, String email, boolean active) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -80,12 +80,6 @@ public class User {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
-	}
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", password=" + password
-				+ ", active=" + active + "]";
 	}
 
 }

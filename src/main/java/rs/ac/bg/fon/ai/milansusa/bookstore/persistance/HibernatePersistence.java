@@ -1,6 +1,8 @@
 package rs.ac.bg.fon.ai.milansusa.bookstore.persistance;
 
-import java.util.Collection;    
+import java.util.Collection;
+
+import java.util.Optional;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +15,7 @@ import rs.ac.bg.fon.ai.milansusa.bookstore.model.Review;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.User;
 
 @Transactional
-@Service ("rs.ac.bg.fon.ai.milansusa.bookstore.persistance.BookstorePersistence")
+@Service("rs.ac.bg.fon.ai.milansusa.bookstore.persistance.BookstorePersistence")
 public class HibernatePersistence implements BookstorePersistence {
 
 	@Autowired
@@ -23,11 +25,8 @@ public class HibernatePersistence implements BookstorePersistence {
 	public Result<Author> getAllAuthors(int page, int limit, String query) {
 		String queryText = "FROM Author WHERE lastName LIKE '" + query + "%' ORDER BY lastName";
 		@SuppressWarnings("unchecked")
-		Collection<Author> authors = sessionFactory.getCurrentSession()
-												   .createQuery(queryText)
-												   .setFirstResult((page - 1) * limit)
-											       .setMaxResults(limit)
-											       .list();
+		Collection<Author> authors = sessionFactory.getCurrentSession().createQuery(queryText)
+				.setFirstResult((page - 1) * limit).setMaxResults(limit).list();
 		queryText = "FROM Author WHERE lastName LIKE '" + query + "%'";
 		int maxResults = sessionFactory.getCurrentSession().createQuery(queryText).list().size();
 		return new Result<>(authors, maxResults);
@@ -42,11 +41,8 @@ public class HibernatePersistence implements BookstorePersistence {
 	public Result<Book> getAllBooks(int page, int limit, String query) {
 		String queryText = "FROM Book WHERE title LIKE '" + query + "%' ORDER BY title";
 		@SuppressWarnings("unchecked")
-		Collection<Book> books = sessionFactory.getCurrentSession()
-											   .createQuery(queryText)
-											   .setFirstResult((page - 1) * limit)
-											   .setMaxResults(limit)
-											   .list();
+		Collection<Book> books = sessionFactory.getCurrentSession().createQuery(queryText)
+				.setFirstResult((page - 1) * limit).setMaxResults(limit).list();
 		queryText = "FROM Book WHERE title LIKE '" + query + "%'";
 		int maxResults = sessionFactory.getCurrentSession().createQuery(queryText).list().size();
 		return new Result<>(books, maxResults);
@@ -61,11 +57,8 @@ public class HibernatePersistence implements BookstorePersistence {
 	public Result<Review> getAllReviews(int page, int limit, String query) {
 		String queryText = "FROM Review WHERE reviewerLastName LIKE '" + query + "%' ORDER BY reviewerLastName";
 		@SuppressWarnings("unchecked")
-		Collection<Review> reviews = sessionFactory.getCurrentSession()
-												   .createQuery(queryText)
-												   .setFirstResult((page - 1) * limit)
-												   .setMaxResults(limit)
-												   .list();
+		Collection<Review> reviews = sessionFactory.getCurrentSession().createQuery(queryText)
+				.setFirstResult((page - 1) * limit).setMaxResults(limit).list();
 		queryText = "FROM Review WHERE reviewerLastName LIKE '" + query + "%'";
 		int maxResults = sessionFactory.getCurrentSession().createQuery(queryText).list().size();
 		return new Result<>(reviews, maxResults);
@@ -78,22 +71,21 @@ public class HibernatePersistence implements BookstorePersistence {
 
 	@Override
 	public Result<Review> getBookReviews(long bookId, int page, int limit, String query) {
-		String queryText = "FROM Review WHERE bookId = " + bookId + " AND reviewerLastName LIKE '" + query + "%' ORDER BY reviewerLastName";
+		String queryText = "FROM Review WHERE bookId = " + bookId + " AND reviewerLastName LIKE '" + query
+				+ "%' ORDER BY reviewerLastName";
 		@SuppressWarnings("unchecked")
-		Collection<Review> reviews = sessionFactory.getCurrentSession()
-												   .createQuery(queryText)
-												   .setFirstResult((page - 1) * limit)
-												   .setMaxResults(limit)
-												   .list();
+		Collection<Review> reviews = sessionFactory.getCurrentSession().createQuery(queryText)
+				.setFirstResult((page - 1) * limit).setMaxResults(limit).list();
 		queryText = "FROM Review WHERE bookId = " + bookId + " AND reviewerLastName LIKE '" + query + "%'";
 		int maxResults = sessionFactory.getCurrentSession().createQuery(queryText).list().size();
 		return new Result<>(reviews, maxResults);
 	}
-	
+
+	@SuppressWarnings("unchecked")
 	@Override
-	public User getUser(String username) {
-		String queryText = "FROM User WHERE name = " + username;
-		return (User) sessionFactory.getCurrentSession().createQuery(queryText).uniqueResult();
+	public Optional<User> getUser(String username) {
+		return sessionFactory.getCurrentSession().createQuery("FROM User WHERE name = :name")
+				.setParameter("name", username).uniqueResultOptional();
 	}
 
 }

@@ -2,6 +2,7 @@ package rs.ac.bg.fon.ai.milansusa.bookstore.persistance;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.Optional;
 import java.sql.*;
 
 import rs.ac.bg.fon.ai.milansusa.bookstore.config.Settings;
@@ -23,8 +24,7 @@ public class DatabasePersistence implements BookstorePersistence {
 	private void openConnection() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			connection = DriverManager.getConnection(database, username,
-					password);
+			connection = DriverManager.getConnection(database, username, password);
 			statement = connection.createStatement();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -52,8 +52,7 @@ public class DatabasePersistence implements BookstorePersistence {
 			}
 
 			q += "ORDER BY lastName " + "LIMIT ? " + "OFFSET ? ";
-			PreparedStatement preparedStatement = connection
-					.prepareStatement(q);
+			PreparedStatement preparedStatement = connection.prepareStatement(q);
 			preparedStatement.setLong(1, limit);
 			preparedStatement.setLong(2, (page - 1) * limit);
 			ResultSet result = preparedStatement.executeQuery();
@@ -87,8 +86,7 @@ public class DatabasePersistence implements BookstorePersistence {
 		String query = "SELECT * " + "FROM authors " + "WHERE id = ?";
 		openConnection();
 		try {
-			PreparedStatement preparedStatement = connection
-					.prepareStatement(query);
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setLong(1, id);
 			ResultSet result = preparedStatement.executeQuery();
 			while (result.next()) {
@@ -118,8 +116,7 @@ public class DatabasePersistence implements BookstorePersistence {
 
 			q += "ORDER BY title " + "LIMIT ? " + "OFFSET ? ";
 
-			PreparedStatement preparedStatement = connection
-					.prepareStatement(q);
+			PreparedStatement preparedStatement = connection.prepareStatement(q);
 			preparedStatement.setLong(1, limit);
 			preparedStatement.setLong(2, (page - 1) * limit);
 			ResultSet result = preparedStatement.executeQuery();
@@ -154,8 +151,7 @@ public class DatabasePersistence implements BookstorePersistence {
 		String query = "SELECT * FROM books WHERE id = ?";
 		openConnection();
 		try {
-			PreparedStatement preparedStatement = connection
-					.prepareStatement(query);
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setLong(1, id);
 			ResultSet result = preparedStatement.executeQuery();
 			while (result.next()) {
@@ -181,18 +177,15 @@ public class DatabasePersistence implements BookstorePersistence {
 				q += "WHERE reviewersLastName LIKE '" + query + "%' ";
 			}
 			q += "ORDER BY rank " + "LIMIT ? " + "OFFSET ? ";
-			PreparedStatement preparedStatement = connection
-					.prepareStatement(q);
+			PreparedStatement preparedStatement = connection.prepareStatement(q);
 			preparedStatement.setLong(1, limit);
 			preparedStatement.setLong(2, (page - 1) * limit);
 			ResultSet result = preparedStatement.executeQuery();
 			while (result.next()) {
 				Review review = new Review();
 				review.setId(result.getLong("id"));
-				review.setReviewerFirstName(result
-						.getString("reviewersFirstName"));
-				review.setReviewerLastName(result
-						.getString("reviewersLastName"));
+				review.setReviewerFirstName(result.getString("reviewersFirstName"));
+				review.setReviewerLastName(result.getString("reviewersLastName"));
 				review.setRank(result.getDouble("rank"));
 				review.setCreated(result.getDate("created"));
 				reviews.add(review);
@@ -219,16 +212,13 @@ public class DatabasePersistence implements BookstorePersistence {
 		String query = "SELECT * FROM reviews WHERE id = ?";
 		openConnection();
 		try {
-			PreparedStatement preparedStatement = connection
-					.prepareStatement(query);
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setLong(1, id);
 			ResultSet result = preparedStatement.executeQuery();
 			while (result.next()) {
 				review.setId(result.getLong("id"));
-				review.setReviewerFirstName(result
-						.getString("reviewersFirstName"));
-				review.setReviewerLastName(result
-						.getString("reviewersLastName"));
+				review.setReviewerFirstName(result.getString("reviewersFirstName"));
+				review.setReviewerLastName(result.getString("reviewersLastName"));
 				review.setRank(result.getDouble("rank"));
 				review.setCreated(result.getDate("created"));
 			}
@@ -240,8 +230,7 @@ public class DatabasePersistence implements BookstorePersistence {
 	}
 
 	@Override
-	public Result<Review> getBookReviews(long bookId, int page, int limit,
-			String query) {
+	public Result<Review> getBookReviews(long bookId, int page, int limit, String query) {
 		Collection<Review> reviews = new LinkedList<>();
 		int maxResults = 0;
 		openConnection();
@@ -251,8 +240,7 @@ public class DatabasePersistence implements BookstorePersistence {
 				q += "AND reviewersLastName LIKE '" + query + "%' ";
 			}
 			q += "ORDER BY rank " + "LIMIT ? " + "OFFSET ? ";
-			PreparedStatement preparedStatement = connection
-					.prepareStatement(q);
+			PreparedStatement preparedStatement = connection.prepareStatement(q);
 			preparedStatement.setLong(1, bookId);
 			preparedStatement.setLong(2, limit);
 			preparedStatement.setLong(3, (page - 1) * limit);
@@ -260,10 +248,8 @@ public class DatabasePersistence implements BookstorePersistence {
 			while (result.next()) {
 				Review review = new Review();
 				review.setId(result.getLong("id"));
-				review.setReviewerFirstName(result
-						.getString("reviewersFirstName"));
-				review.setReviewerLastName(result
-						.getString("reviewersLastName"));
+				review.setReviewerFirstName(result.getString("reviewersFirstName"));
+				review.setReviewerLastName(result.getString("reviewersLastName"));
 				review.setRank(result.getDouble("rank"));
 				review.setCreated(result.getDate("created"));
 				reviews.add(review);
@@ -286,7 +272,7 @@ public class DatabasePersistence implements BookstorePersistence {
 	}
 
 	@Override
-	public User getUser(String username) {
+	public Optional<User> getUser(String username) {
 		// TODO Auto-generated method stub
 		return null;
 	}
