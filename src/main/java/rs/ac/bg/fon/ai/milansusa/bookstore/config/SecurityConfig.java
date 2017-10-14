@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import rs.ac.bg.fon.ai.milansusa.bookstore.services.CustomUserDetailsService;
@@ -21,7 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
 		http.authorizeRequests().antMatchers("/**").authenticated().anyRequest().permitAll().and().formLogin()
-				.permitAll();
+				.loginPage("/login.html").permitAll().and().logout().permitAll();
 	}
 
 	@Override
@@ -34,13 +35,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return new PasswordEncoder() {
 
 			@Override
-			public boolean matches(CharSequence charSequence, String s) {
-				return true;
+			public boolean matches(CharSequence rawPassword, String encodedPassword) {
+				if (BCrypt.checkpw(rawPassword.toString(), encodedPassword))
+					return true;
+				return false;
 			}
 
 			@Override
-			public String encode(CharSequence charSequence) {
-				return charSequence.toString();
+			public String encode(CharSequence rawPassword) {
+				return BCrypt.hashpw(rawPassword.toString(), BCrypt.gensalt());
 			}
 
 		};
