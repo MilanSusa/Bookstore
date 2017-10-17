@@ -22,7 +22,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
 		http.authorizeRequests().antMatchers("/**").authenticated().anyRequest().permitAll().and().formLogin()
-				.loginPage("/login.html").permitAll().and().logout().permitAll();
+				.loginPage("/login1.html")
+				.loginProcessingUrl("/loginspring")
+				.permitAll().and().logout().permitAll();
 	}
 
 	@Override
