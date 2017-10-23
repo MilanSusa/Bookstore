@@ -24,4 +24,6 @@ public interface BookstorePersistence {
 	Result<Review> getBookReviews(long bookId, int page, int limit, String query);
 
 	Optional<User> getUser(String username);
+
+	void saveUser(User user);
 }

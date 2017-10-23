@@ -277,4 +277,11 @@ public class DatabasePersistence implements BookstorePersistence {
 		return null;
 	}
 
+	@Override
+	public void saveUser(User user) {
+		// TODO Auto-generated method stub
+	}
+
+
+
 }

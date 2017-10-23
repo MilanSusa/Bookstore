@@ -1,11 +1,11 @@
 package rs.ac.bg.fon.ai.milansusa.bookstore.persistance;
 
 import java.util.Collection;
-
 import java.util.Optional;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -84,8 +84,14 @@ public class HibernatePersistence implements BookstorePersistence {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Optional<User> getUser(String username) {
-		return sessionFactory.getCurrentSession().createQuery("FROM User WHERE name = :name")
-				.setParameter("name", username).uniqueResultOptional();
+		return sessionFactory.getCurrentSession().createQuery("FROM User WHERE username = :username")
+				.setParameter("username", username).uniqueResultOptional();
+	}
+
+	@Override
+	public void saveUser(User user) {
+		user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
+		sessionFactory.getCurrentSession().save(user);
 	}
 
 }
