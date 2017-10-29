@@ -1,7 +1,9 @@
 package rs.ac.bg.fon.ai.milansusa.bookstore.persistance;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Author;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Book;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Review;
+import rs.ac.bg.fon.ai.milansusa.bookstore.model.Role;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.User;
 
 @Transactional
@@ -90,6 +93,9 @@ public class HibernatePersistence implements BookstorePersistence {
 
 	@Override
 	public void saveUser(User user) {
+		Set<Role> roles = new HashSet<>();
+		roles.add(new Role("USER"));
+		user.setRoles(roles);
 		user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
 		sessionFactory.getCurrentSession().save(user);
 	}
