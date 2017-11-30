@@ -2,6 +2,7 @@ var rootURL = "http://localhost:8080/webapi";
 
 $(function() {
 	findAllReviews(1, '');
+	welcomeToReviewsPage();
 });
 
 function findAllReviews(page, query) {
@@ -27,6 +28,19 @@ function findAllReviews(page, query) {
 					query, page, 10);
 		}
 	});
+}
+
+function welcomeToReviewsPage() {
+	var position = document.cookie.indexOf("name=");
+   	if (position != -1) {
+   		var start = position + 5;
+   		var end = document.cookie.indexOf(";", start); 
+   		if(end == -1) { 
+   			end = document.cookie.length;
+   		} 
+    	user = unescape(document.cookie.substring(start, end));
+    	document.getElementById("listReviews").innerHTML = 'Welcome to the reviews page, ' + user + '.';
+   } 
 }
 
 function searchReviews() {

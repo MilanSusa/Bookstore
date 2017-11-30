@@ -2,6 +2,7 @@ var rootURL = "http://localhost:8080/webapi";
 
 $(function() {
 	findAllAuthors(1, '');
+	welcomeToAuthorsPage();
 });
 
 function findAllAuthors(page, query) {
@@ -25,6 +26,19 @@ function findAllAuthors(page, query) {
 					query, page, 10);
 		}
 	});
+}
+
+function welcomeToAuthorsPage() {
+	var position = document.cookie.indexOf("name=");
+   	if (position != -1) {
+   		var start = position + 5;
+   		var end = document.cookie.indexOf(";", start); 
+   		if(end == -1) { 
+   			end = document.cookie.length;
+   		} 
+    	user = unescape(document.cookie.substring(start, end));
+    	document.getElementById("listAuthors").innerHTML = 'Welcome to the authors page, ' + user + '.';
+   } 
 }
 
 function searchAuthors() {

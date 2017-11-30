@@ -2,6 +2,7 @@ var rootURL = "http://localhost:8080/webapi";
 
 $(function() {
 	findAllBooks(1, '');
+	welcomeToBooksPage();
 });
 
 function findAllBooks(page, query) {
@@ -25,6 +26,19 @@ function findAllBooks(page, query) {
 					query, page, 10);
 		}
 	});
+}
+
+function welcomeToBooksPage() {
+	var position = document.cookie.indexOf("name=");
+   	if (position != -1) {
+   		var start = position + 5;
+   		var end = document.cookie.indexOf(";", start); 
+   		if(end == -1) { 
+   			end = document.cookie.length;
+   		} 
+    	user = unescape(document.cookie.substring(start, end));
+    	document.getElementById("listBooks").innerHTML = 'Welcome to the books page, ' + user + '.';
+   } 
 }
 
 function searchBooks() {

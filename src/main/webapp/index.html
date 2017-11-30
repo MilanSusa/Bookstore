@@ -64,8 +64,8 @@
 				<!-- Page Heading -->
 				<div class="row">
 					<div class="col-lg-12">
-						<h1 class="page-header">
-							Dashboard <small>Statistics Overview</small>
+						<h1 id="Dashboard" class="page-header">
+							Dashboard
 						</h1>
 						<ol class="breadcrumb">
 							<li class="active"><i class="fa fa-dashboard"></i> Dashboard
@@ -150,6 +150,19 @@
 
 	</div>
 	<!-- /#wrapper -->
+	
+	<script>
+		var position = document.cookie.indexOf("name=");
+		if (position != -1) {
+			var start = position + 5;
+			var end = document.cookie.indexOf(";", start); 
+			if(end == -1) { 
+				end = document.cookie.length;
+			} 
+			user = unescape(document.cookie.substring(start, end));
+			document.getElementById("Dashboard").innerHTML = 'Welcome to dashboard, ' + user + '.';
+		} 
+	</script>
 
 	<!-- jQuery -->
 	<script
