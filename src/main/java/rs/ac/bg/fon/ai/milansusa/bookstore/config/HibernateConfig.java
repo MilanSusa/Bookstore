@@ -42,14 +42,6 @@ public class HibernateConfig {
 		properties.setProperty("hibernate.connection.characterEncoding", "UTF-8");
 		properties.setProperty("hibernate.connection.useUnicode", String.valueOf(true));
 		properties.setProperty("hibernate.connection.autocommit", String.valueOf(false));
-		// properties.setProperty("hibernate.cache.use_second_level_cache",
-		// String.valueOf(true));
-		// properties.setProperty("hibernate.cache.use_query_cache",
-		// String.valueOf(true));
-		// properties.setProperty("hibernate.cache.use_structured_entries",
-		// String.valueOf(true));
-		// properties.setProperty("hibernate.cache.region.factory_class",
-		// "org.hibernate.cache.EhCacheRegionFactory");
 		return properties;
 	}
 

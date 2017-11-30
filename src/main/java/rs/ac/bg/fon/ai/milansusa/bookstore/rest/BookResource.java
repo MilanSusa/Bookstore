@@ -4,9 +4,9 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,9 +27,8 @@ public class BookResource {
 	@Autowired
 	private ReviewService reviewService;
 
-	@RequestMapping(method = RequestMethod.GET)
-	public String getBooks(
-			@RequestParam(value = "limit", required = false) Integer limit,
+	@GetMapping
+	public String getBooks(@RequestParam(value = "limit", required = false) Integer limit,
 			@RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "query", required = false) String query) {
 		if (limit == null || limit == 0) {
@@ -46,17 +45,16 @@ public class BookResource {
 		return response;
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@GetMapping("/{id}")
 	public String getBook(@PathVariable("id") long bookId) {
 		Book book = bookService.getBook(bookId);
 		Collection<Book> bookHolder = new LinkedList<Book>();
 		bookHolder.add(book);
-		String response = BookJsonSerializer.serializeBooks(new Result<>(
-				bookHolder, 1));
+		String response = BookJsonSerializer.serializeBooks(new Result<>(bookHolder, 1));
 		return response;
 	}
 
-	@RequestMapping(value = "/{id}/reviews", method = RequestMethod.GET)
+	@GetMapping("/{id}/reviews")
 	public String getBookReviews(@PathVariable("id") long bookId,
 			@RequestParam(value = "limit", required = false) Integer limit,
 			@RequestParam(value = "page", required = false) Integer page,
@@ -70,8 +68,7 @@ public class BookResource {
 		if (query == null) {
 			query = "";
 		}
-		Result<Review> result = reviewService.getReviewsForBook(bookId, page,
-				limit, query);
+		Result<Review> result = reviewService.getReviewsForBook(bookId, page, limit, query);
 		String response = ReviewJsonSerializer.serializeReviews(result);
 		return response;
 	}

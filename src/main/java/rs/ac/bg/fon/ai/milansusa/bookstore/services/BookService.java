@@ -11,14 +11,14 @@ import rs.ac.bg.fon.ai.milansusa.bookstore.persistance.Result;
 public class BookService {
 
 	@Autowired
-	private BookstorePersistence persistance;
+	private BookstorePersistence persistence;
 
 	public Result<Book> getAllBooks(int page, int limit, String query) {
-		return persistance.getAllBooks(page, limit, query);
+		return persistence.getAllBooks(page, limit, query);
 	}
 
 	public Book getBook(long bookId) {
-		return persistance.getBook(bookId);
+		return persistence.getBook(bookId);
 	}
 
 }

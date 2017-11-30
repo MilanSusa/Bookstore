@@ -28,7 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 							"/webapi/authors", 
 							"/webapi/books",
 							"/webapi/reviews")
-				.authenticated().anyRequest().permitAll().and().formLogin().loginPage("/login1.html")
+				.authenticated().anyRequest().permitAll().and().formLogin().loginPage("/login.html")
 				.loginProcessingUrl("/loginspring").permitAll().and().logout().permitAll();
 	}
 

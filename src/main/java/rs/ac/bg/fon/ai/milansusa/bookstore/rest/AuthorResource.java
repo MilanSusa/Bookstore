@@ -4,9 +4,9 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,9 +22,8 @@ public class AuthorResource {
 	@Autowired
 	private AuthorService authorService;
 
-	@RequestMapping(method = RequestMethod.GET)
-	public String getAuthors(
-			@RequestParam(value = "limit", required = false) Integer limit,
+	@GetMapping
+	public String getAuthors(@RequestParam(value = "limit", required = false) Integer limit,
 			@RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "query", required = false) String query) {
 		if (limit == null || limit == 0) {
@@ -41,13 +40,12 @@ public class AuthorResource {
 		return response;
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@GetMapping("/{id}")
 	public String getAuthor(@PathVariable("id") long authorId) {
 		Author author = authorService.getAuthor(authorId);
 		Collection<Author> authorHolder = new LinkedList<>();
 		authorHolder.add(author);
-		String response = AuthorJsonSerializer.serializeAuthors(new Result<>(
-				authorHolder, 1));
+		String response = AuthorJsonSerializer.serializeAuthors(new Result<>(authorHolder, 1));
 		return response;
 	}
 
