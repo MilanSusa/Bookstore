@@ -15,8 +15,10 @@ public class User {
 	@Id
 	@GeneratedValue
 	private int id;
+	private String name;
 	private String username;
 	private String password;
+	private String email;
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
 	private Set<Role> roles;
 
@@ -24,18 +26,22 @@ public class User {
 		roles = new HashSet<>();
 	}
 
-	public User(int id, String username, String password, String email, boolean active) {
+	public User(int id, String name, String username, String password, String email) {
 		super();
 		this.id = id;
+		this.name = name;
 		this.username = username;
 		this.password = password;
+		this.email = email;
 	}
 
 	public User(User user) {
 		super();
 		this.id = user.getId();
+		this.name = user.getName();
 		this.username = user.getUsername();
 		this.password = user.getPassword();
+		this.email = user.getEmail();
 		this.roles = user.getRoles();
 	}
 
@@ -69,6 +75,22 @@ public class User {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

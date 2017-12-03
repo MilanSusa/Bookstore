@@ -83,10 +83,10 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 
 	<script>	
 		function makeUsernameCookie() {
-			var name = document.getElementById("username").value;
+			var username = document.getElementById("username").value;
 			var expires = new Date();
-			expires.setMinutes(expires.getMinutes() + 5); 
-			document.cookie = "name = " + escape(name) + "; expires = " + expires.toGMTString();
+			expires.setMinutes(expires.getMinutes() + 9); 
+			document.cookie = "username = " + escape(username) + "; expires = " + expires.toGMTString();
 		}
 	</script>
 
