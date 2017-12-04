@@ -93,6 +93,10 @@ public class HibernatePersistence implements BookstorePersistence {
 
 	@Override
 	public void saveUser(User user) {
+		User testUser = getUser(user.getUsername()).orElse(null);
+		if (testUser != null) {
+			return;
+		}
 		Set<Role> roles = new HashSet<>();
 		roles.add(new Role("USER"));
 		user.setRoles(roles);
