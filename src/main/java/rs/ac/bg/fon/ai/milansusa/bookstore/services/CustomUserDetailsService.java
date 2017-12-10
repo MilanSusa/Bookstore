@@ -8,19 +8,19 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import rs.ac.bg.fon.ai.milansusa.bookstore.dao.UserDAO;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.CustomUserDetails;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.User;
-import rs.ac.bg.fon.ai.milansusa.bookstore.persistance.BookstorePersistence;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
 	@Autowired
-	private BookstorePersistence persistence;
+	private UserDAO userDAO;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Optional<User> optionalUser = persistence.getUser(username);
+		Optional<User> optionalUser = userDAO.getUser(username);
 		optionalUser.orElseThrow(() -> new UsernameNotFoundException("Username not found"));
 		return optionalUser.map(CustomUserDetails::new).get();
 	}

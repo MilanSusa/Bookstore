@@ -1,29 +1,28 @@
 package rs.ac.bg.fon.ai.milansusa.bookstore.services;
 
-import org.springframework.beans.factory.annotation.Autowired; 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import rs.ac.bg.fon.ai.milansusa.bookstore.dao.Result;
+import rs.ac.bg.fon.ai.milansusa.bookstore.dao.ReviewDAO;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Review;
-import rs.ac.bg.fon.ai.milansusa.bookstore.persistance.BookstorePersistence;
-import rs.ac.bg.fon.ai.milansusa.bookstore.persistance.Result;
 
 @Service
 public class ReviewService {
 
 	@Autowired
-	private BookstorePersistence persistence;
+	private ReviewDAO reviewDAO;
 
 	public Result<Review> getAllReviews(int page, int limit, String query) {
-		return persistence.getAllReviews(page, limit, query);
+		return reviewDAO.getAllReviews(page, limit, query);
 	}
 
 	public Review getReview(long reviewId) {
-		return persistence.getReview(reviewId);
+		return reviewDAO.getReview(reviewId);
 	}
 
-	public Result<Review> getReviewsForBook(long bookId, int page, int limit,
-			String query) {
-		return persistence.getBookReviews(bookId, page, limit, query);
+	public Result<Review> getReviewsForBook(long bookId, int page, int limit, String query) {
+		return reviewDAO.getBookReviews(bookId, page, limit, query);
 	}
 
 }

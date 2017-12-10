@@ -1,4 +1,4 @@
-package rs.ac.bg.fon.ai.milansusa.bookstore.persistance;
+package rs.ac.bg.fon.ai.milansusa.bookstore.dao;
 
 import java.util.Collection;
 

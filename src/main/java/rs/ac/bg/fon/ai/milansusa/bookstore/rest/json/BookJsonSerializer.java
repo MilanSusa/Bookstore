@@ -2,8 +2,9 @@ package rs.ac.bg.fon.ai.milansusa.bookstore.rest.json;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+
+import rs.ac.bg.fon.ai.milansusa.bookstore.dao.Result;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Book;
-import rs.ac.bg.fon.ai.milansusa.bookstore.persistance.Result;
 
 public class BookJsonSerializer {
 

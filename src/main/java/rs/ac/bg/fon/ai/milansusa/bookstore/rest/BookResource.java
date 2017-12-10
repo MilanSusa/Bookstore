@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import rs.ac.bg.fon.ai.milansusa.bookstore.dao.Result;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Book;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Review;
-import rs.ac.bg.fon.ai.milansusa.bookstore.persistance.Result;
 import rs.ac.bg.fon.ai.milansusa.bookstore.rest.json.BookJsonSerializer;
 import rs.ac.bg.fon.ai.milansusa.bookstore.rest.json.ReviewJsonSerializer;
 import rs.ac.bg.fon.ai.milansusa.bookstore.services.BookService;
