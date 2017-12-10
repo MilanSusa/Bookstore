@@ -47,3 +47,12 @@ function searchReviews() {
 	var query = $('#search').val();
 	findAllReviews(1, query);
 }
+
+function executeSearch(inputField) {
+	var $this = this;
+	var delayedSearch = function() {
+		findAllReviews(1, $(inputField).val());
+	};
+	window.clearTimeout(this.keystrokeTimeout);
+	this.keystrokeTimeout = window.setTimeout(delayedSearch, 250);
+}

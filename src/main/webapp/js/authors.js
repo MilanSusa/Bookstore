@@ -45,3 +45,12 @@ function searchAuthors() {
 	var query = $('#search').val();
 	findAllAuthors(1, query);
 }
+
+function executeSearch(inputField) {
+	var $this = this;
+	var delayedSearch = function() {
+		findAllAuthors(1, $(inputField).val());
+	};
+	window.clearTimeout(this.keystrokeTimeout);
+	this.keystrokeTimeout = window.setTimeout(delayedSearch, 250);
+}

@@ -75,20 +75,6 @@
 				</div>
 				<!-- /.row -->
 
-				<script>
-					function executeSearch(inputField) {
-						var $this = this;
-
-						var delayedSearch = function() {
-							findAllReviews(1, $(inputField).val());
-						};
-
-						window.clearTimeout(this.keystrokeTimeout);
-						this.keystrokeTimeout = window.setTimeout(
-								delayedSearch, 250);
-					}
-				</script>
-
 				<div class="row">
 					<div class="col-lg-6">
 						<div class="input-group">

@@ -82,29 +82,9 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 		<a href="login.html" style="color: blue">Login</a> 
     </form>
   </div>
-
-	<script>
-		function executeSubmit() {	
-			var registrationURL = "http://localhost:8080/webapi/registration"; 
-			var user = {
-				name: document.getElementById("name").value,
-				username: document.getElementById("username").value,
-				password: document.getElementById("password").value,
-				email: document.getElementById("email").value
-			};
-			$.ajax({
-				type: "POST",
-				url: registrationURL,
-    			data: JSON.stringify(user),
-    			contentType: "application/json",
-    			success : function(user) {
-    				alert("Registration sent.") 
-    			}
-			});
-		}
-	</script>
 	
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="js/registration.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 </body>
 </html>

@@ -150,23 +150,9 @@
 
 	</div>
 	<!-- /#wrapper -->
-	
-	<script>
-		var position = document.cookie.indexOf("username=");
-		if (position != -1) {
-			var start = position + 9;
-			var end = document.cookie.indexOf(";", start); 
-			if(end == -1) { 
-				end = document.cookie.length;
-			} 
-			user = unescape(document.cookie.substring(start, end));
-			document.getElementById("Dashboard").innerHTML = 'Welcome to dashboard, ' + user + '.';
-		} 
-	</script>
 
 	<!-- jQuery -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="js/index.js"></script>
 
 	<!-- Bootstrap Core JavaScript -->

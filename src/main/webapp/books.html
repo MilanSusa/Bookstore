@@ -75,20 +75,6 @@
 				</div>
 				<!-- /.row -->
 
-				<script>
-					function executeSearch(inputField) {
-						var $this = this;
-
-						var delayedSearch = function() {
-							findAllBooks(1, $(inputField).val());
-						};
-
-						window.clearTimeout(this.keystrokeTimeout);
-						this.keystrokeTimeout = window.setTimeout(
-								delayedSearch, 250);
-					}
-				</script>
-
 				<div class="row">
 					<div class="col-lg-6">
 						<div class="input-group">
@@ -138,8 +124,7 @@
 	<!-- /#wrapper -->
 
 	<!-- jQuery -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="js/pagination.js"></script>
 	<script src="js/books.js"></script>
 	<!-- Bootstrap Core JavaScript -->

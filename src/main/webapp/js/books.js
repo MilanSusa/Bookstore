@@ -45,3 +45,12 @@ function searchBooks() {
 	var query = $('#search').val();
 	findAllBooks(1, query);
 }
+
+function executeSearch(inputField) {
+	var $this = this;
+	var delayedSearch = function() {
+		findAllBooks(1, $(inputField).val());
+	};
+	window.clearTimeout(this.keystrokeTimeout);
+	this.keystrokeTimeout = window.setTimeout(delayedSearch, 250);
+}
