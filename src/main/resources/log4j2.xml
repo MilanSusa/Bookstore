@@ -4,9 +4,16 @@
 		<Console name="Console">
 			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
 		</Console>
-		<File name="MyFile" fileName="logs/app.log">
-			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
-		</File>
+		<RollingFile name="MyFile" fileName="logs/app.log"
+			filePattern="logs/app.%i.log" ignoreExceptions="false">
+			<PatternLayout>
+				<Pattern>%d{yyyy-MM-dd HH:mm:ss} %p %m%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<OnStartupTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="5 KB" />
+			</Policies>
+		</RollingFile>
 	</Appenders>
 	<Loggers>
 		<Root level="DEBUG">

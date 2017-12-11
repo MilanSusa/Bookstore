@@ -8,6 +8,6 @@ public interface UserDAO {
 
 	Optional<User> getUser(String username);
 
-	void saveUser(User user);
+	void saveUser(User user) throws Exception;
 
 }

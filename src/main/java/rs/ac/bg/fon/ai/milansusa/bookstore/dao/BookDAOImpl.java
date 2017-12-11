@@ -2,6 +2,8 @@ package rs.ac.bg.fon.ai.milansusa.bookstore.dao;
 
 import java.util.Collection;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,9 +17,11 @@ public class BookDAOImpl implements BookDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
+	private static final Logger logger = LogManager.getLogger(BookDAOImpl.class);
 
 	@Override
 	public Result<Book> getAllBooks(int page, int limit, String query) {
+		logger.info("Fetching all books from database.");
 		String queryText = "FROM Book WHERE title LIKE '" + query + "%' ORDER BY title";
 		@SuppressWarnings("unchecked")
 		Collection<Book> books = sessionFactory.getCurrentSession().createQuery(queryText)
@@ -29,6 +33,7 @@ public class BookDAOImpl implements BookDAO {
 
 	@Override
 	public Book getBook(long id) {
+		logger.info("Fetching book with id [" + id + "] from database.");
 		return (Book) sessionFactory.getCurrentSession().get(Book.class, id);
 	}
 

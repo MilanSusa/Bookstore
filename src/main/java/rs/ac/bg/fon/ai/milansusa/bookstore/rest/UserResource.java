@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.User;
 import rs.ac.bg.fon.ai.milansusa.bookstore.services.UserService;
+import rs.ac.bg.fon.ai.milansusa.bookstore.services.UserServiceException;
 
 @RestController
 @RequestMapping("/webapi/registration")
@@ -17,7 +18,7 @@ public class UserResource {
 	UserService userService;
 
 	@PostMapping
-	public void saveUser(@RequestBody User user) {
+	public void saveUser(@RequestBody User user) throws UserServiceException {
 		userService.saveUser(user);
 	}
 

@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -19,19 +21,23 @@ public class UserDAOImpl implements UserDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
+	private static final Logger logger = LogManager.getLogger(UserDAOImpl.class);
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public Optional<User> getUser(String username) {
+		logger.info("Fetching user with username [" + username + "] from database.");
 		return sessionFactory.getCurrentSession().createQuery("FROM User WHERE username = :username")
 				.setParameter("username", username).uniqueResultOptional();
 	}
 
 	@Override
-	public void saveUser(User user) {
+	public void saveUser(User user) throws Exception {
+		logger.info("Saving user with email [" + user.getEmail() + "] to database.");
 		User testUser = getUser(user.getUsername()).orElse(null);
 		if (testUser != null) {
-			return;
+			logger.error("User with email [" + user.getEmail() + "] already exists.");
+			throw new Exception("User with email [" + user.getEmail() + "] already exists.");
 		}
 		Role role = new Role("USER");
 		Set<Role> roles = new HashSet<>();
