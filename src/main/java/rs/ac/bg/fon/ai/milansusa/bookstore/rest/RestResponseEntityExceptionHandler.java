@@ -15,8 +15,8 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
 	@ExceptionHandler(value = { UserServiceException.class })
 	protected ResponseEntity<Object> handleConflict(Exception ex, WebRequest request) {
-		String bodyOfResponse = ex.getMessage();
-		return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.CONFLICT, request);
+		String bodyOfResponse = Response.BAD_REQUEST.getBody();
+		return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
 	}
 
 }

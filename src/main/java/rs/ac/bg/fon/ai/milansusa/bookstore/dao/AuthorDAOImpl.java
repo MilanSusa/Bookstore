@@ -6,13 +6,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Author;
 
 @Transactional
-@Service("rs.ac.bg.fon.ai.milansusa.bookstore.dao.AuthorDAO")
+@Repository
 public class AuthorDAOImpl implements AuthorDAO {
 
 	@Autowired

@@ -11,8 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-import rs.ac.bg.fon.ai.milansusa.bookstore.model.enums.Gender;
-
 @Entity
 public class Author {
 

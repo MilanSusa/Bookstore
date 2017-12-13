@@ -9,14 +9,14 @@ import org.apache.logging.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Role;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.User;
 
 @Transactional
-@Service("rs.ac.bg.fon.ai.milansusa.bookstore.dao.UserDAO")
+@Repository
 public class UserDAOImpl implements UserDAO {
 
 	@Autowired
@@ -34,7 +34,7 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public void saveUser(User user) throws Exception {
 		logger.info("Saving user with email [" + user.getEmail() + "] to database.");
-		User testUser = getUser(user.getUsername()).orElse(null);
+		User testUser = getUser(user.getEmail()).orElse(null);
 		if (testUser != null) {
 			logger.error("User with email [" + user.getEmail() + "] already exists.");
 			throw new Exception("User with email [" + user.getEmail() + "] already exists.");
