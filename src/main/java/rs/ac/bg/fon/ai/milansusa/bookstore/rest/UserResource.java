@@ -20,6 +20,7 @@ public class UserResource {
 	@PostMapping
 	public void saveUser(@RequestBody User user) throws UserServiceException {
 		userService.saveUser(user);
+		SendMailSSL.sendMail(user);
 	}
 
 }

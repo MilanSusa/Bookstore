@@ -96,6 +96,12 @@
  			<artifactId>tomcat-dbcp</artifactId>
  			<version>7.0.55</version>
   		</dependency>
+  		
+  		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.5.5</version>
+		</dependency>
   	
 	</dependencies>
 
