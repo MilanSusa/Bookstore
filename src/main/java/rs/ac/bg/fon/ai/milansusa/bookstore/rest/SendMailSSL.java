@@ -1,6 +1,11 @@
 package rs.ac.bg.fon.ai.milansusa.bookstore.rest;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Properties;
+
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -12,6 +17,7 @@ import javax.mail.internet.MimeMessage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import rs.ac.bg.fon.ai.milansusa.bookstore.config.Settings;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.User;
 
 public class SendMailSSL {
@@ -20,8 +26,8 @@ public class SendMailSSL {
 
 	public static void sendMail(User user) {
 		logger.info("Sending user registration mail...");
-		final String username = "milansusa28@gmail.com";
-		final String password = "t3st3m41ls3nd3r";
+		final String username = Settings.getInstance().config.getEmail().getEmail();
+		final String password = Settings.getInstance().config.getEmail().getPassword();
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "smtp.gmail.com");
 		props.put("mail.smtp.socketFactory.port", "465");
@@ -35,10 +41,12 @@ public class SendMailSSL {
 		});
 		try {
 			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("milansusa28@gmail.com"));
+			message.setFrom(new InternetAddress(username));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(user.getEmail()));
-			message.setSubject("Registration recorded");
-			message.setText("Dear " + user.getName() + "," + "\n\nYour registration has been recorded.");
+			message.setSubject("Bookstore registration");
+			String content = readContentFromFile(
+					"src" + File.separator + "main" + File.separator + "webapp" + File.separator + "email.html");
+			message.setContent(content, "text/html; charset=utf-8");
 			Transport.send(message);
 			logger.info("User registration mail sent.");
 		} catch (MessagingException e) {
@@ -46,6 +54,25 @@ public class SendMailSSL {
 					e.getMessage());
 			throw new RuntimeException(e);
 		}
+	}
+
+	private static String readContentFromFile(String fileName) {
+		StringBuffer contents = new StringBuffer();
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(fileName));
+			try {
+				String line = null;
+				while ((line = reader.readLine()) != null) {
+					contents.append(line);
+					contents.append(System.getProperty("line.separator"));
+				}
+			} finally {
+				reader.close();
+			}
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		return contents.toString();
 	}
 
 }

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import rs.ac.bg.fon.ai.milansusa.bookstore.dao.Result;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Author;
 import rs.ac.bg.fon.ai.milansusa.bookstore.rest.json.AuthorJsonSerializer;
-import rs.ac.bg.fon.ai.milansusa.bookstore.services.AuthorService;
+import rs.ac.bg.fon.ai.milansusa.bookstore.service.AuthorService;
 
 @RestController
 @RequestMapping("/webapi/authors")

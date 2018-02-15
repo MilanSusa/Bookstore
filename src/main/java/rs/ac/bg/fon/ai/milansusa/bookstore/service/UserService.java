@@ -1,4 +1,4 @@
-package rs.ac.bg.fon.ai.milansusa.bookstore.services;
+package rs.ac.bg.fon.ai.milansusa.bookstore.service;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

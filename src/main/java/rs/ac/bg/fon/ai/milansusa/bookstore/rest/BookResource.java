@@ -15,8 +15,8 @@ import rs.ac.bg.fon.ai.milansusa.bookstore.model.Book;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Review;
 import rs.ac.bg.fon.ai.milansusa.bookstore.rest.json.BookJsonSerializer;
 import rs.ac.bg.fon.ai.milansusa.bookstore.rest.json.ReviewJsonSerializer;
-import rs.ac.bg.fon.ai.milansusa.bookstore.services.BookService;
-import rs.ac.bg.fon.ai.milansusa.bookstore.services.ReviewService;
+import rs.ac.bg.fon.ai.milansusa.bookstore.service.BookService;
+import rs.ac.bg.fon.ai.milansusa.bookstore.service.ReviewService;
 
 @RestController
 @RequestMapping("/webapi/books")

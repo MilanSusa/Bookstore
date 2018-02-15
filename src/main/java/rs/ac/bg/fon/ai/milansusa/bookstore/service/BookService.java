@@ -1,4 +1,4 @@
-package rs.ac.bg.fon.ai.milansusa.bookstore.services;
+package rs.ac.bg.fon.ai.milansusa.bookstore.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

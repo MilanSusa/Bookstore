@@ -2,9 +2,9 @@ package rs.ac.bg.fon.ai.milansusa.bookstore.config;
 
 public class DbConfig {
 
-	public String url;
-	public String username;
-	public String password;
+	private String url;
+	private String username;
+	private String password;
 
 	public String getUrl() {
 		return url;

@@ -1,4 +1,4 @@
-package rs.ac.bg.fon.ai.milansusa.bookstore.services;
+package rs.ac.bg.fon.ai.milansusa.bookstore.service;
 
 import java.util.Optional;
 

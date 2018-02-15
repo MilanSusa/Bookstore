@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import rs.ac.bg.fon.ai.milansusa.bookstore.dao.Result;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.Review;
 import rs.ac.bg.fon.ai.milansusa.bookstore.rest.json.ReviewJsonSerializer;
-import rs.ac.bg.fon.ai.milansusa.bookstore.services.ReviewService;
+import rs.ac.bg.fon.ai.milansusa.bookstore.service.ReviewService;
 
 @RestController
 @RequestMapping("/webapi/reviews")

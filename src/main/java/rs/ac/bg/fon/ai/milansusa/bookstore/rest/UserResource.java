@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.User;
-import rs.ac.bg.fon.ai.milansusa.bookstore.services.UserService;
-import rs.ac.bg.fon.ai.milansusa.bookstore.services.UserServiceException;
+import rs.ac.bg.fon.ai.milansusa.bookstore.service.UserService;
+import rs.ac.bg.fon.ai.milansusa.bookstore.service.UserServiceException;
 
 @RestController
 @RequestMapping("/webapi/registration")

@@ -1,8 +1,12 @@
 {
 	"format": false,
-	"database": {
+	"dbConfig": {
 		"url": "jdbc:mysql://localhost:3306/bookstore",
 		"username": "root",
 		"password": "root"
+	},
+	"emailConfig": {
+		"email": "milansusa28@gmail.com",
+		"password": "t3st3m41ls3nd3r"
 	}
 }

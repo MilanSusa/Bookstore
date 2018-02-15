@@ -2,8 +2,9 @@ package rs.ac.bg.fon.ai.milansusa.bookstore.config;
 
 public class Config {
 
-	public boolean format;
-	public DbConfig database;
+	private boolean format;
+	private DbConfig dbConfig;
+	private EmailConfig emailConfig;
 
 	public boolean isFormat() {
 		return format;
@@ -14,11 +15,19 @@ public class Config {
 	}
 
 	public DbConfig getDatabase() {
-		return database;
+		return dbConfig;
 	}
 
 	public void setDatabase(DbConfig database) {
-		this.database = database;
+		this.dbConfig = database;
+	}
+
+	public EmailConfig getEmail() {
+		return emailConfig;
+	}
+
+	public void setEmail(EmailConfig email) {
+		this.emailConfig = email;
 	}
 
 }
