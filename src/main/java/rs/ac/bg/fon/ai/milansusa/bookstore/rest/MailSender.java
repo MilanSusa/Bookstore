@@ -20,14 +20,14 @@ import org.apache.logging.log4j.Logger;
 import rs.ac.bg.fon.ai.milansusa.bookstore.config.Settings;
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.User;
 
-public class SendMailSSL {
+public class MailSender {
 
-	private static final Logger logger = LogManager.getLogger(SendMailSSL.class);
+	private static final Logger logger = LogManager.getLogger(MailSender.class);
 
 	public static void sendMail(User user) {
 		logger.info("Sending user registration mail...");
-		final String username = Settings.getInstance().config.getEmail().getEmail();
-		final String password = Settings.getInstance().config.getEmail().getPassword();
+		final String username = Settings.getInstance().config.getEmailConfig().getEmail();
+		final String password = Settings.getInstance().config.getEmailConfig().getPassword();
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "smtp.gmail.com");
 		props.put("mail.smtp.socketFactory.port", "465");
@@ -70,6 +70,7 @@ public class SendMailSSL {
 				reader.close();
 			}
 		} catch (IOException ex) {
+			logger.error("A problem occured while reading file: " + ex.getMessage());
 			ex.printStackTrace();
 		}
 		return contents.toString();

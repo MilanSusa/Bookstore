@@ -25,9 +25,9 @@ public class HibernateConfig {
 	public DataSource dataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl(Settings.getInstance().config.getDatabase().getUrl());
-		dataSource.setUsername(Settings.getInstance().config.getDatabase().getUsername());
-		dataSource.setPassword(Settings.getInstance().config.getDatabase().getPassword());
+		dataSource.setUrl(Settings.getInstance().config.getDbConfig().getUrl());
+		dataSource.setUsername(Settings.getInstance().config.getDbConfig().getUsername());
+		dataSource.setPassword(Settings.getInstance().config.getDbConfig().getPassword());
 		return dataSource;
 	}
 

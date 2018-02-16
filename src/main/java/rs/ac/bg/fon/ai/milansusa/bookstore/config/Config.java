@@ -14,20 +14,20 @@ public class Config {
 		this.format = format;
 	}
 
-	public DbConfig getDatabase() {
+	public DbConfig getDbConfig() {
 		return dbConfig;
 	}
 
-	public void setDatabase(DbConfig database) {
-		this.dbConfig = database;
+	public void setDbConfig(DbConfig dbConfig) {
+		this.dbConfig = dbConfig;
 	}
 
-	public EmailConfig getEmail() {
+	public EmailConfig getEmailConfig() {
 		return emailConfig;
 	}
 
-	public void setEmail(EmailConfig email) {
-		this.emailConfig = email;
+	public void setEmailConfig(EmailConfig emailConfig) {
+		this.emailConfig = emailConfig;
 	}
 
 }

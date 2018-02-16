@@ -31,10 +31,18 @@ public class UserDAOImpl implements UserDAO {
 				.setParameter("username", username).uniqueResultOptional();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public Optional<User> getUserByEmail(String email) {
+		logger.info("Fetching user with email [" + email + "] from database.");
+		return sessionFactory.getCurrentSession().createQuery("FROM User WHERE email = :email")
+				.setParameter("email", email).uniqueResultOptional();
+	}
+
 	@Override
 	public void saveUser(User user) throws Exception {
 		logger.info("Saving user with email [" + user.getEmail() + "] to database.");
-		User testUser = getUser(user.getEmail()).orElse(null);
+		User testUser = getUserByEmail(user.getEmail()).orElse(null);
 		if (testUser != null) {
 			logger.error("User with email [" + user.getEmail() + "] already exists.");
 			throw new Exception("User with email [" + user.getEmail() + "] already exists.");
