@@ -1,7 +1,6 @@
 package rs.ac.bg.fon.ai.milansusa.bookstore.rest;
 
-import java.util.Collection;
-import java.util.LinkedList;
+import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,17 +35,13 @@ public class AuthorResource {
 			query = "";
 		}
 		Result<Author> result = authorService.getAllAuthors(page, limit, query);
-		String response = AuthorJsonSerializer.serializeAuthors(result);
-		return response;
+		return AuthorJsonSerializer.serializeAuthors(result);
 	}
 
 	@GetMapping("/{id}")
 	public String getAuthor(@PathVariable("id") long authorId) {
 		Author author = authorService.getAuthor(authorId);
-		Collection<Author> authorHolder = new LinkedList<>();
-		authorHolder.add(author);
-		String response = AuthorJsonSerializer.serializeAuthors(new Result<>(authorHolder, 1));
-		return response;
+		return AuthorJsonSerializer.serializeAuthors(new Result<>(Arrays.asList(author), 1));
 	}
 
 }

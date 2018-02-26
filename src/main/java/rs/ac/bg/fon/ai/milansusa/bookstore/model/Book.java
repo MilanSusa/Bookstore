@@ -27,7 +27,7 @@ public class Book {
 		reviews = new HashSet<>();
 	}
 
-	public Book(long id, String title, int releaseYear, String author) {
+	public Book(long id, String title, int releaseYear) {
 		this.id = id;
 		this.title = title;
 		this.releaseYear = releaseYear;

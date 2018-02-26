@@ -1,7 +1,6 @@
 package rs.ac.bg.fon.ai.milansusa.bookstore.rest;
 
-import java.util.Collection;
-import java.util.LinkedList;
+import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,21 +40,17 @@ public class BookResource {
 			query = "";
 		}
 		Result<Book> result = bookService.getAllBooks(page, limit, query);
-		String response = BookJsonSerializer.serializeBooks(result);
-		return response;
+		return BookJsonSerializer.serializeBooks(result);
 	}
 
 	@GetMapping("/{id}")
 	public String getBook(@PathVariable("id") long bookId) {
 		Book book = bookService.getBook(bookId);
-		Collection<Book> bookHolder = new LinkedList<Book>();
-		bookHolder.add(book);
-		String response = BookJsonSerializer.serializeBooks(new Result<>(bookHolder, 1));
-		return response;
+		return BookJsonSerializer.serializeBooks(new Result<>(Arrays.asList(book), 1));
 	}
 
 	@GetMapping("/{id}/reviews")
-	public String getBookReviews(@PathVariable("id") long bookId,
+	public String getReviewsForBook(@PathVariable("id") long bookId,
 			@RequestParam(value = "limit", required = false) Integer limit,
 			@RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "query", required = false) String query) {
@@ -69,8 +64,7 @@ public class BookResource {
 			query = "";
 		}
 		Result<Review> result = reviewService.getReviewsForBook(bookId, page, limit, query);
-		String response = ReviewJsonSerializer.serializeReviews(result);
-		return response;
+		return ReviewJsonSerializer.serializeReviews(result);
 	}
 
 }

@@ -1,7 +1,6 @@
 package rs.ac.bg.fon.ai.milansusa.bookstore.rest;
 
-import java.util.Collection;
-import java.util.LinkedList;
+import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,17 +35,13 @@ public class ReviewResource {
 			query = "";
 		}
 		Result<Review> result = reviewService.getAllReviews(page, limit, query);
-		String response = ReviewJsonSerializer.serializeReviews(result);
-		return response;
+		return ReviewJsonSerializer.serializeReviews(result);
 	}
 
 	@GetMapping("/{id}")
 	public String getReview(@PathVariable("id") long reviewId) {
 		Review review = reviewService.getReview(reviewId);
-		Collection<Review> reviewHolder = new LinkedList<>();
-		reviewHolder.add(review);
-		String response = ReviewJsonSerializer.serializeReviews(new Result<>(reviewHolder, 1));
-		return response;
+		return ReviewJsonSerializer.serializeReviews(new Result<>(Arrays.asList(review), 1));
 	}
 
 }

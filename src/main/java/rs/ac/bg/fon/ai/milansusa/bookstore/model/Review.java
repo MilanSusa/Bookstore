@@ -26,7 +26,7 @@ public class Review {
 
 	}
 
-	public Review(long id, String reviewerFirstName, String reviewerLastName, double rank, Date created) {
+	public Review(long id, String reviewerFirstName, String reviewerLastName, double rank) {
 		this.id = id;
 		this.reviewerFirstName = reviewerFirstName;
 		this.reviewerLastName = reviewerLastName;
