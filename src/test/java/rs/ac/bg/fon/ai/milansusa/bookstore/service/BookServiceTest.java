@@ -23,10 +23,12 @@ public class BookServiceTest {
 
 	@TestConfiguration
 	static class BookServiceTestContextConfiguration {
+		
 		@Bean
 		public BookService bookService() {
 			return new BookService();
 		}
+		
 	}
 
 	@Autowired
@@ -48,19 +50,19 @@ public class BookServiceTest {
 	@Test
 	public void getBook_whenIdFound_ShouldReturnBook() {
 		Book actualBook = bookService.getBook(1);
-		assertEquals(this.id, actualBook.getId());
-		assertEquals(this.title, actualBook.getTitle());
-		assertEquals(this.year, actualBook.getReleaseYear());
+		assertBook(actualBook);
 	}
 
 	@Test
 	public void getAllBooks_shouldReturnBooks() {
 		Result<Book> actualBooksResult = bookService.getAllBooks(1, 1, "");
-		actualBooksResult.getData().forEach(i -> {
-			assertEquals(this.id, i.getId());
-			assertEquals(this.title, i.getTitle());
-			assertEquals(this.year, i.getReleaseYear());
-		});
+		actualBooksResult.getData().forEach(actualBook -> assertBook(actualBook));
+	}
+
+	private void assertBook(Book actualBook) {
+		assertEquals(this.id, actualBook.getId());
+		assertEquals(this.title, actualBook.getTitle());
+		assertEquals(this.year, actualBook.getReleaseYear());
 	}
 
 }

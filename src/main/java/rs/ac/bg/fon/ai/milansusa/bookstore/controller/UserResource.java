@@ -1,4 +1,4 @@
-package rs.ac.bg.fon.ai.milansusa.bookstore.rest;
+package rs.ac.bg.fon.ai.milansusa.bookstore.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.gson.JsonObject;
 
 import rs.ac.bg.fon.ai.milansusa.bookstore.model.User;
+import rs.ac.bg.fon.ai.milansusa.bookstore.service.MailSender;
 import rs.ac.bg.fon.ai.milansusa.bookstore.service.UserService;
 import rs.ac.bg.fon.ai.milansusa.bookstore.service.UserServiceException;
 
@@ -25,7 +26,7 @@ public class UserResource {
 	@ResponseStatus(HttpStatus.CREATED)
 	public String saveUser(@RequestBody User user) throws UserServiceException {
 		userService.saveUser(user);
-		MailSender.sendMail(user);
+		MailSender.sendMail(user.getEmail());
 		JsonObject response = new JsonObject();
 		response.addProperty("code", String.valueOf(Response.CREATED.getCode()));
 		response.addProperty("message", String.valueOf(Response.CREATED.getBody()));

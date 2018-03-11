@@ -25,14 +25,6 @@ public class UserDAOImpl implements UserDAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Optional<User> getUser(String username) {
-		logger.info("Fetching user with username [" + username + "] from database.");
-		return sessionFactory.getCurrentSession().createQuery("FROM User WHERE username = :username")
-				.setParameter("username", username).uniqueResultOptional();
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
 	public Optional<User> getUserByEmail(String email) {
 		logger.info("Fetching user with email [" + email + "] from database.");
 		return sessionFactory.getCurrentSession().createQuery("FROM User WHERE email = :email")
@@ -41,20 +33,26 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public void saveUser(User user) throws Exception {
-		logger.info("Saving user with email [" + user.getEmail() + "] to database.");
-		User testUser = getUserByEmail(user.getEmail()).orElse(null);
-		if (testUser != null) {
-			logger.error("User with email [" + user.getEmail() + "] already exists.");
-			throw new Exception("User with email [" + user.getEmail() + "] already exists.");
-		}
+		checkIfUserExists(user);
+		// adjust user and role
 		Role role = new Role("USER");
 		Set<Role> roles = new HashSet<>();
 		roles.add(role);
 		user.setRoles(roles);
 		role.setUser(user);
 		user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
+		// persist user and role
+		logger.info("Saving user with email [" + user.getEmail() + "] to database.");
 		sessionFactory.getCurrentSession().save(user);
 		sessionFactory.getCurrentSession().save(role);
+	}
+
+	private void checkIfUserExists(User user) throws Exception {
+		User testUser = getUserByEmail(user.getEmail()).orElse(null);
+		if (testUser != null) {
+			logger.error("User with email [" + user.getEmail() + "] already exists.");
+			throw new Exception("User with email [" + user.getEmail() + "] already exists.");
+		}
 	}
 
 }

@@ -1,4 +1,4 @@
-package rs.ac.bg.fon.ai.milansusa.bookstore.rest;
+package rs.ac.bg.fon.ai.milansusa.bookstore.controller;
 
 public enum Response {
 

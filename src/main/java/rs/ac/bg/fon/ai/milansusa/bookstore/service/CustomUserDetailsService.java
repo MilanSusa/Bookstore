@@ -22,10 +22,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 	private static final Logger logger = LogManager.getLogger(CustomUserDetailsService.class);
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		logger.info("Loading user by username [" + username + "].");
-		Optional<User> optionalUser = userDAO.getUser(username);
-		optionalUser.orElseThrow(() -> new UsernameNotFoundException("Username: " + username + " not found"));
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		logger.info("Loading user by email [" + email + "].");
+		Optional<User> optionalUser = userDAO.getUserByEmail(email);
+		optionalUser.orElseThrow(() -> new UsernameNotFoundException("Email: " + email + " not found"));
 		return optionalUser.map(CustomUserDetails::new).get();
 	}
 

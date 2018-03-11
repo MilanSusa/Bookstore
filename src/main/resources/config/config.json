@@ -7,6 +7,10 @@
 	},
 	"emailConfig": {
 		"email": "milansusa28@gmail.com",
-		"password": "t3st3m41ls3nd3r"
+		"password": "t3st3m41ls3nd3r",
+		"host": "smtp.gmail.com",
+		"port": "465",
+		"clazz": "javax.net.ssl.SSLSocketFactory",
+		"auth": "true"
 	}
 }

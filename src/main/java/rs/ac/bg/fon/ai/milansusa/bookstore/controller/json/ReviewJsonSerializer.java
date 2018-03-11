@@ -1,4 +1,4 @@
-package rs.ac.bg.fon.ai.milansusa.bookstore.rest.json;
+package rs.ac.bg.fon.ai.milansusa.bookstore.controller.json;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;

@@ -1,5 +1,7 @@
 package rs.ac.bg.fon.ai.milansusa.bookstore.service;
 
+import java.util.Optional;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,10 @@ public class UserService {
 			logger.error("User with email [" + user.getEmail() + "] is not persisted.");
 			throw new UserServiceException(e.getMessage());
 		}
+	}
+
+	public Optional<User> getUserByUsername(String username) {
+		return userDAO.getUserByEmail(username);
 	}
 
 }

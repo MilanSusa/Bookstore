@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import rs.ac.bg.fon.ai.milansusa.bookstore.controller.BookResource;
 import rs.ac.bg.fon.ai.milansusa.bookstore.service.BookService;
 import rs.ac.bg.fon.ai.milansusa.bookstore.service.ReviewService;
 

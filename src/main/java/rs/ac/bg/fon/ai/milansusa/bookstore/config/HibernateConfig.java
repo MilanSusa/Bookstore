@@ -35,7 +35,7 @@ public class HibernateConfig {
 	public Properties hibernateProperties() {
 		Properties properties = new Properties();
 		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect");
-		properties.setProperty("hibernate.show_sql", String.valueOf(true));
+		properties.setProperty("hibernate.show_sql", String.valueOf(false));
 		properties.setProperty("hibernate.hbm2ddl.auto", "update");
 		properties.setProperty("hibernate.connection.pool_size", String.valueOf(20));
 		properties.setProperty("hibernate.connection.charSet", "UTF-8");

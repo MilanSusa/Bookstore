@@ -30,15 +30,16 @@ function findAllAuthors(page, query) {
 
 function welcomeToAuthorsPage() {
 	var position = document.cookie.indexOf("username=");
-   	if (position != -1) {
-   		var start = position + 9;
-   		var end = document.cookie.indexOf(";", start); 
-   		if(end == -1) { 
-   			end = document.cookie.length;
-   		} 
-    	user = unescape(document.cookie.substring(start, end));
-    	document.getElementById("listAuthors").innerHTML = 'Welcome to the authors page, ' + user + '.';
-   } 
+	if (position != -1) {
+		var start = position + 9;
+		var end = document.cookie.indexOf(";", start);
+		if (end == -1) {
+			end = document.cookie.length;
+		}
+		user = unescape(document.cookie.substring(start, end));
+		document.getElementById("listAuthors").innerHTML = 'Welcome to the authors page, '
+				+ user + '.';
+	}
 }
 
 function searchAuthors() {

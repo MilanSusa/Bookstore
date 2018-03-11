@@ -110,7 +110,7 @@ CREATE TABLE `hibernate_sequence` (
 
 LOCK TABLES `hibernate_sequence` WRITE;
 /*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
-INSERT INTO `hibernate_sequence` VALUES (24),(24),(24);
+INSERT INTO `hibernate_sequence` VALUES (95),(95),(95);
 /*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -180,7 +180,6 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
-  `username` varchar(45) NOT NULL,
   `password` varchar(60) NOT NULL,
   `name` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
@@ -194,7 +193,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Milan','$2a$10$moqUa4U4r62erJTQId./IegISoy6o11d.zPogCiHZ3PXNo1H9GQbS','',''),(2,'m','$2a$10$mtjDMeLdrvY9POv1vKdLYeVOcp4sOgEY4Lz2JzGqXsRWmvws5ISdK','','');
+INSERT INTO `user` VALUES (1,'$2a$10$moqUa4U4r62erJTQId./IegISoy6o11d.zPogCiHZ3PXNo1H9GQbS','Milan','milan_susa@hotmail.com'),(2,'$2a$10$mtjDMeLdrvY9POv1vKdLYeVOcp4sOgEY4Lz2JzGqXsRWmvws5ISdK','Milan','milansule3@hotmail.com');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -207,4 +206,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-04 22:26:25
+-- Dump completed on 2018-03-11 20:57:00

@@ -1,7 +1,6 @@
 package rs.ac.bg.fon.ai.milansusa.bookstore.model;
 
 import java.util.Collection;
-
 import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -29,7 +28,7 @@ public class CustomUserDetails extends User implements UserDetails {
 
 	@Override
 	public String getUsername() {
-		return super.getUsername();
+		return super.getEmail();
 	}
 
 	@Override

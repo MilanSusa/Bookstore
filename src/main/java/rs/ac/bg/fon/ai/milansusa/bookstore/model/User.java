@@ -3,6 +3,7 @@ package rs.ac.bg.fon.ai.milansusa.bookstore.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -16,8 +17,8 @@ public class User {
 	@GeneratedValue
 	private int id;
 	private String name;
-	private String username;
 	private String password;
+	@Column(unique = true)
 	private String email;
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
 	private Set<Role> roles;
@@ -30,7 +31,6 @@ public class User {
 		super();
 		this.id = id;
 		this.name = name;
-		this.username = username;
 		this.password = password;
 		this.email = email;
 	}
@@ -39,7 +39,6 @@ public class User {
 		super();
 		this.id = user.getId();
 		this.name = user.getName();
-		this.username = user.getUsername();
 		this.password = user.getPassword();
 		this.email = user.getEmail();
 		this.roles = user.getRoles();
@@ -51,14 +50,6 @@ public class User {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
 	}
 
 	public String getPassword() {

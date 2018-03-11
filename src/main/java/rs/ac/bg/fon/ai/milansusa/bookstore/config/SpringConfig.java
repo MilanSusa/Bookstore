@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan(value = { "rs.ac.bg.fon.ai.milansusa.bookstore.services" })
+@ComponentScan(value = { "rs.ac.bg.fon.ai.milansusa.bookstore.service" })
 public class SpringConfig {
 
 	@Bean

@@ -24,10 +24,12 @@ public class AuthorServiceTest {
 
 	@TestConfiguration
 	static class AuthorServiceTestContextConfiguration {
+		
 		@Bean
 		public AuthorService authorService() {
 			return new AuthorService();
 		}
+		
 	}
 
 	@Autowired
@@ -50,21 +52,20 @@ public class AuthorServiceTest {
 	@Test
 	public void getAuthor_whenIdFound_ShouldReturnAuthor() {
 		Author actualAuthor = authorService.getAuthor(1);
-		assertEquals(this.id, actualAuthor.getId());
-		assertEquals(this.firstName, actualAuthor.getFirstName());
-		assertEquals(this.lastName, actualAuthor.getLastName());
-		assertEquals(String.valueOf(this.gender), String.valueOf(actualAuthor.getGender()));
+		assertAuthor(actualAuthor);
 	}
 
 	@Test
 	public void getAllAuthors_shouldReturnAuthors() {
 		Result<Author> actualAuthorsResult = authorService.getAllAuthors(1, 1, "");
-		actualAuthorsResult.getData().forEach(i -> {
-			assertEquals(this.id, i.getId());
-			assertEquals(this.firstName, i.getFirstName());
-			assertEquals(this.lastName, i.getLastName());
-			assertEquals(String.valueOf(this.gender), String.valueOf(i.getGender()));
-		});
+		actualAuthorsResult.getData().forEach(actualAuthor -> assertAuthor(actualAuthor));
+	}
+
+	private void assertAuthor(Author actualAuthor) {
+		assertEquals(this.id, actualAuthor.getId());
+		assertEquals(this.firstName, actualAuthor.getFirstName());
+		assertEquals(this.lastName, actualAuthor.getLastName());
+		assertEquals(String.valueOf(this.gender), String.valueOf(actualAuthor.getGender()));
 	}
 
 }

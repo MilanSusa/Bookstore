@@ -1,4 +1,4 @@
-package rs.ac.bg.fon.ai.milansusa.bookstore.rest;
+package rs.ac.bg.fon.ai.milansusa.bookstore.controller;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

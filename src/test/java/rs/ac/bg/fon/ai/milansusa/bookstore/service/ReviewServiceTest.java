@@ -23,10 +23,12 @@ public class ReviewServiceTest {
 
 	@TestConfiguration
 	static class ReviewServiceTestContextConfiguration {
+
 		@Bean
 		public ReviewService reviewService() {
 			return new ReviewService();
 		}
+
 	}
 
 	@Autowired
@@ -49,21 +51,20 @@ public class ReviewServiceTest {
 	@Test
 	public void getReview_whenIdFound_ShouldReturnReview() {
 		Review actualReview = reviewService.getReview(1);
-		assertEquals(this.id, actualReview.getId());
-		assertEquals(this.reveiwerFirstName, actualReview.getReviewerFirstName());
-		assertEquals(this.reviewerLastName, actualReview.getReviewerLastName());
-		assertEquals(String.valueOf(this.rank), String.valueOf(actualReview.getRank()));
+		assertReview(actualReview);
 	}
 
 	@Test
 	public void getAllReviews_shouldReturnReviews() {
 		Result<Review> actualReviewsResult = reviewService.getAllReviews(1, 1, "");
-		actualReviewsResult.getData().forEach(i -> {
-			assertEquals(this.id, i.getId());
-			assertEquals(this.reveiwerFirstName, i.getReviewerFirstName());
-			assertEquals(this.reviewerLastName, i.getReviewerLastName());
-			assertEquals(String.valueOf(this.rank), String.valueOf(i.getRank()));
-		});
+		actualReviewsResult.getData().forEach(actualReview -> assertReview(actualReview));
+	}
+
+	private void assertReview(Review actualReview) {
+		assertEquals(this.id, actualReview.getId());
+		assertEquals(this.reveiwerFirstName, actualReview.getReviewerFirstName());
+		assertEquals(this.reviewerLastName, actualReview.getReviewerLastName());
+		assertEquals(String.valueOf(this.rank), String.valueOf(actualReview.getRank()));
 	}
 
 }

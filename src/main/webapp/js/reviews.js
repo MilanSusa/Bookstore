@@ -32,15 +32,16 @@ function findAllReviews(page, query) {
 
 function welcomeToReviewsPage() {
 	var position = document.cookie.indexOf("username=");
-   	if (position != -1) {
-   		var start = position + 9;
-   		var end = document.cookie.indexOf(";", start); 
-   		if(end == -1) { 
-   			end = document.cookie.length;
-   		} 
-    	user = unescape(document.cookie.substring(start, end));
-    	document.getElementById("listReviews").innerHTML = 'Welcome to the reviews page, ' + user + '.';
-   } 
+	if (position != -1) {
+		var start = position + 9;
+		var end = document.cookie.indexOf(";", start);
+		if (end == -1) {
+			end = document.cookie.length;
+		}
+		user = unescape(document.cookie.substring(start, end));
+		document.getElementById("listReviews").innerHTML = 'Welcome to the reviews page, '
+				+ user + '.';
+	}
 }
 
 function searchReviews() {
