@@ -201,16 +201,13 @@ input:focus {
 }
 </style>
 
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
-
 </head>
 
 <body>
 	<div class="login">
 		<h1>Login</h1>
 		<form method="post" action="/loginspring">
-			<input id="username" type="text" placeholder="Username"
+			<input id="username" type="text" placeholder="Email"
 				name="username" required="required" /> <input id="password"
 				type="password" name="password" placeholder="Password"
 				required="required" />
@@ -221,6 +218,8 @@ input:focus {
 	</div>
 
 	<script src="js/login.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 </body>
 </html>

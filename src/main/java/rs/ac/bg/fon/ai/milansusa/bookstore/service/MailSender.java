@@ -31,7 +31,6 @@ public class MailSender {
 		final String clazz = Settings.getInstance().config.getEmailConfig().getClazz();
 		final String auth = String.valueOf(Settings.getInstance().config.getEmailConfig().isAuth());
 
-		System.out.println(email + password + host + port + clazz + auth);
 		Properties props = new Properties();
 		props.put("mail.smtp.host", host);
 		props.put("mail.smtp.socketFactory.port", port);

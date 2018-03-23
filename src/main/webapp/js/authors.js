@@ -36,10 +36,19 @@ function welcomeToAuthorsPage() {
 		if (end == -1) {
 			end = document.cookie.length;
 		}
-		user = unescape(document.cookie.substring(start, end));
-		document.getElementById("listAuthors").innerHTML = 'Welcome to the authors page, '
-				+ user + '.';
+		var email = unescape(document.cookie.substring(start, end));
 	}
+
+	var rootURL = "http://localhost:8080/webapi/registration/";
+	$.ajax({
+		type : "GET",
+		url : rootURL + email,
+		dataType : "json",
+		success : function(user) {
+			document.getElementById("listAuthors").innerHTML = 'Welcome to the authors page, '
+				+ user.name + '.';
+		}
+	});
 }
 
 function searchAuthors() {
@@ -48,7 +57,6 @@ function searchAuthors() {
 }
 
 function executeSearch(inputField) {
-	var $this = this;
 	var delayedSearch = function() {
 		findAllAuthors(1, $(inputField).val());
 	};

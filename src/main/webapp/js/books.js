@@ -35,11 +35,20 @@ function welcomeToBooksPage() {
 		var end = document.cookie.indexOf(";", start);
 		if (end == -1) {
 			end = document.cookie.length;
-		}
-		user = unescape(document.cookie.substring(start, end));
-		document.getElementById("listBooks").innerHTML = 'Welcome to the books page, '
-				+ user + '.';
+		}	
+		var email = unescape(document.cookie.substring(start, end));
 	}
+
+	var rootURL = "http://localhost:8080/webapi/registration/";
+	$.ajax({
+		type : "GET",
+		url : rootURL + email,
+		dataType : "json",
+		success : function(user) {
+			document.getElementById("listBooks").innerHTML = 'Welcome to the books page, '
+				+ user.name + '.';
+		}
+	});
 }
 
 function searchBooks() {
@@ -48,7 +57,6 @@ function searchBooks() {
 }
 
 function executeSearch(inputField) {
-	var $this = this;
 	var delayedSearch = function() {
 		findAllBooks(1, $(inputField).val());
 	};
